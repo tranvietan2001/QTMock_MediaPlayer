@@ -7,6 +7,7 @@ Item {
     height: widthBtn
     signal clicked();
     property int widthBtn: 0
+    property int  sttLoopBtn: 0
 
 
     Rectangle{
@@ -30,6 +31,11 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
+
+
+            // if(sttLoopBtn == 0) bgLoopBtnID.color = "while"
+            // else if(sttLoopBtn == 2) bgLoopBtnID.color = "drakcyan"
+
             loopBtnID.clicked()
         }
 

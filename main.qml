@@ -9,7 +9,7 @@ Window {
     visible: true
     title: qsTr("Media Player")
 
-    property real count: 0
+    // property int  sttLoopBtn: 0
 
     Row{
         id: rowViewID
@@ -130,11 +130,7 @@ Window {
                                             widthBtn: 40
                                             anchors.verticalCenter: parent.verticalCenter
                                             onClicked: {
-                                                // statusShuffle = !statusShufle
-                                                // statusShuffle = !statusShuffle;
                                                 console.log(statusShuffle)
-
-                                                // sfBtnID.bg
                                             }
                                         }
 
@@ -195,31 +191,54 @@ Window {
                                             widthBtn: 40
                                             anchors.verticalCenter:  parent.verticalCenter
                                         }
-                                        LoopOneButton{
-                                            id: lpoBtnID
-                                            widthBtn: 40
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            visible: true
-
-                                            onClicked: {
-                                                lpoBtnID.visible = false
-                                                lpBtnID.visible = true
-                                                console.log("Loop one clicked")
-                                            }
-                                        }
-
 
                                         LoopButton{
                                             id: lpBtnID
                                             widthBtn: 40
                                             anchors.verticalCenter: parent.verticalCenter
+                                            visible: true
+
+                                            onClicked: {
+                                                sttLoopBtn++
+                                                if(sttLoopBtn >2) sttLoopBtn = 0
+
+                                                if(sttLoopBtn == 1){
+                                                    lpoBtnID.visible = true
+                                                    lpBtnID.visible = false
+
+                                                    console.log("LOOP ONE")
+                                                }
+
+                                                if(sttLoopBtn == 0) console.log("LOOP OFF")
+                                                console.log(sttLoopBtn)
+                                            }
+                                        }
+
+                                        LoopOneButton{
+                                            id: lpoBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter: parent.verticalCenter
                                             visible: false
 
                                             onClicked: {
-                                                lpoBtnID.visible = true
-                                                lpBtnID.visible = false
-                                                console.log("Loop clicked")
+                                                sttLoopBtn++
+                                                if(sttLoopBtn >2) sttLoopBtn = 0
+
+                                                if(sttLoopBtn == 2){
+                                                    lpoBtnID.visible = false
+                                                    lpBtnID.visible = true
+
+                                                    console.log("LOOP ON")
+                                                }
+
+                                                console.log(sttLoopBtn)
                                             }
+
+                                            // onClicked: {
+                                            //     lpoBtnID.visible = true
+                                            //     lpBtnID.visible = false
+                                            //     console.log("Loop one clicked")
+                                            // }
                                         }
 
 

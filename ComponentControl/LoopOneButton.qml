@@ -30,7 +30,12 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
+
+            if(sttLoopBtn == 1)
+
+
             loopOneBtnID.clicked()
+
         }
 
         onEntered:     {
