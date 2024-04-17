@@ -12,6 +12,8 @@ Window {
     // property int  sttLoopBtn: 0
 
     Row{
+
+
         id: rowViewID
         anchors.fill: parent
 
