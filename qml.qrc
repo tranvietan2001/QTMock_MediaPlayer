@@ -56,5 +56,7 @@
         <file>ComponentControl/ViewMedia.qml</file>
         <file>ComponentControl/ScrollBarMedia.qml</file>
         <file>ComponentControl/ShuffleButton.qml</file>
+        <file>ComponentControl/LoopButton.qml</file>
+        <file>ComponentControl/LoopOneButton.qml</file>
     </qresource>
 </RCC>

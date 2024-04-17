@@ -766,7 +766,9 @@ qrc_qml.cpp: ../../qml.qrc \
 		../../ComponentControl/PreviousButton.qml \
 		../../ComponentControl/ForwardButton.qml \
 		../../ComponentControl/ZoomOutButton.qml \
+		../../ComponentControl/LoopButton.qml \
 		../../ComponentControl/PauseButton.qml \
+		../../ComponentControl/LoopOneButton.qml \
 		../../ComponentControl/PlayButton.qml \
 		../../ComponentControl/ZoomInButton.qml \
 		../../ComponentControl/ShuffleButton.qml \

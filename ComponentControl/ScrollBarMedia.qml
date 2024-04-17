@@ -23,13 +23,12 @@ Item {
             width: heightScrollbar+10
             height: width
             color: "yellow"
+            anchors.verticalCenter: parent.verticalCenter
 
             MouseArea{
 
             }
         }
-
-
 
         MouseArea{
             anchors.fill: parent

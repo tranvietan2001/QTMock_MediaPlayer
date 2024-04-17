@@ -4,10 +4,13 @@ import "ComponentControl"
 Window {
     width: 1390
     height: 750
+    minimumWidth: 760
+    minimumHeight: 400
     visible: true
     title: qsTr("Media Player")
 
     property real count: 0
+
     Row{
         id: rowViewID
         anchors.fill: parent
@@ -80,11 +83,12 @@ Window {
 
                     visible: true
                 }
+
                 Rectangle{
                     id:itemControlMediaID
                     width: parent.width
                     height: 100
-                    color: "springgreen"
+                    // color: "springgreen"
                     visible: true
 
                     Row{
@@ -107,14 +111,14 @@ Window {
 
                                 Rectangle{
                                     width: parent.width
-                                    height: parent.height/2
+                                    height: parent.height/3
                                     color: "gray"
                                 }
                                 Rectangle{
 
                                     width: parent.width
-                                    height: parent.height/2
-                                    color: "gray"
+                                    height: parent.height/3*2
+                                    // color: "gray"
 
                                     Row{
                                         height: parent.height
@@ -125,6 +129,13 @@ Window {
                                             id: sfBtnID
                                             widthBtn: 40
                                             anchors.verticalCenter: parent.verticalCenter
+                                            onClicked: {
+                                                // statusShuffle = !statusShufle
+                                                // statusShuffle = !statusShuffle;
+                                                console.log(statusShuffle)
+
+                                                // sfBtnID.bg
+                                            }
                                         }
 
                                         PreviousButton{
@@ -142,7 +153,7 @@ Window {
 
                                         PlayButton{
                                             id: playBtnID
-                                            widthBtn: 40
+                                            widthBtn: 50
                                             anchors.verticalCenter:  parent.verticalCenter
                                             visible: true
 
@@ -160,7 +171,7 @@ Window {
 
                                         PauseButton{
                                             id: pauseBtnID
-                                            widthBtn: 40
+                                            widthBtn: 50
                                             anchors.verticalCenter:  parent.verticalCenter
                                             visible: false
 
@@ -184,6 +195,34 @@ Window {
                                             widthBtn: 40
                                             anchors.verticalCenter:  parent.verticalCenter
                                         }
+                                        LoopOneButton{
+                                            id: lpoBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            visible: true
+
+                                            onClicked: {
+                                                lpoBtnID.visible = false
+                                                lpBtnID.visible = true
+                                                console.log("Loop one clicked")
+                                            }
+                                        }
+
+
+                                        LoopButton{
+                                            id: lpBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            visible: false
+
+                                            onClicked: {
+                                                lpoBtnID.visible = true
+                                                lpBtnID.visible = false
+                                                console.log("Loop clicked")
+                                            }
+                                        }
+
+
                                     }
                                 }
                             }
@@ -201,9 +240,12 @@ Window {
 
     }
 
-    onWidthChanged: {
-        console.log(width)
-        console.log(height)
+    MouseArea{
+        //760x400
     }
 
+    onWidthChanged: {
+        console.log("w: "+width)
+        console.log("h: "+height)
+    }
 }

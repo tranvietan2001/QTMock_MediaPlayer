@@ -7,7 +7,7 @@ Item {
     height: widthBtn
     signal clicked();
     property int widthBtn: 0
-
+    property bool statusShuffle: false
 
     Rectangle{
         id: bgShuffleBtnID
@@ -31,6 +31,14 @@ Item {
         hoverEnabled: true
         onClicked: {
             shuffleBtnID.clicked()
+
+            statusShuffle = !statusShuffle
+
+            if(statusShuffle){
+                bgShuffleBtnID.color = "darkcyan"
+            }else bgShuffleBtnID.color = "transparent"
+
+
         }
 
         onEntered:     {
