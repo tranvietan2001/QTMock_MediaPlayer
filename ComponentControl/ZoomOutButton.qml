@@ -3,9 +3,10 @@ import QtQuick 2.15
 
 Item {
     id: zoomOutBtnID
-    width: 50
-    height: 50
+    width: with_btn
+    height: with_btn
     signal clicked();
+    property int with_btn: 0
 
 
     Rectangle{
@@ -23,7 +24,6 @@ Item {
             source: "./icon/zoom_out_b.png"
         }
     }
-
 
     MouseArea{
         anchors.fill: parent

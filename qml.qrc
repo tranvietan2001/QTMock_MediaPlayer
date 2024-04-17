@@ -53,5 +53,6 @@
         <file>ComponentControl/BackwardButton.qml</file>
         <file>ComponentControl/ZoomInButton.qml</file>
         <file>ComponentControl/ZoomOutButton.qml</file>
+        <file>ComponentControl/ViewMedia.qml</file>
     </qresource>
 </RCC>

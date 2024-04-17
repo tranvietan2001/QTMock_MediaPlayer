@@ -17,15 +17,9 @@ Window {
             // width: rowViewID.width/3
             width: 200
             height: rowViewID.height
-            color: "#DDDDDD"
+            color: "silver"
             visible: true
             // opacity: 0.5
-
-            // Text {
-            //     id: name1
-            //     text: qsTr("text11")
-            // }
-
 
             Column{
                 spacing: 2
@@ -66,79 +60,64 @@ Window {
 
                 }
 
-                PlayButton{
-                    id: playerBtn
-                    onClicked: {
-                        count++
-                        console.log("play: "+count)
-                    }
-                }
-
-
-                PauseButton{
-                    id: pauseBtn
-                    onClicked: {
-                        count++
-                        console.log("pause: "+count)
-                    }
-                }
-
             }
         }
 
-        Rectangle{
-            id: r2
-            // width: rowViewID.width - rowViewID.width/3
+        // Rectangle{
+        //     id: r2
+        //     // width: rowViewID.width - rowViewID.width/3
+        //     width: rowViewID.width - r1.width
+        //     height: rowViewID.height
+        //     color: "#FFFFFF"
+        //     visible: true
+        //     Text {
+        //         id: name2
+        //         text: qsTr("text")
+        //     }
+        // }
+
+        ViewMedia{
+            id: viewAudioID
             width: rowViewID.width - r1.width
             height: rowViewID.height
-            color: "#FFFFFF"
+            // color: "#FFFFFF"
             visible: true
-            Text {
-                id: name2
-                text: qsTr("text")
+
+            Column{
+                anchors.fill: parent
+                Rectangle{
+                    id: viewAreaID
+                    width: parent.width
+                    height: parent.height - controlMediaID.height
+                    color: "red"
+
+                    visible: true
+                }
+                Rectangle{
+                    id: controlMediaID
+                    width: parent.width
+                    height: 100
+                    color: "springgreen"
+                    visible: true
+
+                    Row{
+                        anchors.fill: parent
+                        Rectangle{
+                            id: inforMediaID
+
+
+                        }
+                    }
+                }
             }
         }
 
 
     }
 
-    // TabBar {
-    //     id: bar
-    //     width: parent.width
-    //     TabButton {
-    //         text: qsTr("Home")
-    //     }
-    //     TabButton {
-    //         text: qsTr("Discover")
-    //     }
-    //     TabButton {
-    //         text: qsTr("Activity")
-    //     }
-    // }
-
-
-    // Rectangle{
-    //     id: btnCheckID
-
-    //     width: 100
-    //     height: 100
-    //     color: "lightblue"
-    // }
-
     onWidthChanged: {
         console.log(width)
         console.log(height)
-        // if(width > 1000) {
-
-        //     // r1.visible = false
-        //     r2.width = width
-        // }
-        // else{
-
-        //     r1.visible = true
-        // }
-        // r1.width = rowViewID.width/3
-        // r2.width = rowViewID.width - rowViewID.width/3
     }
 
 }
