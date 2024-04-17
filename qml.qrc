@@ -4,5 +4,48 @@
         <file>ComponentControl/PlayButton.qml</file>
         <file>ComponentControl/icon/play_b.png</file>
         <file>ComponentControl/icon/play_w.png</file>
+        <file>ComponentControl/PauseButton.qml</file>
+        <file>ComponentControl/icon/folder_b.png</file>
+        <file>ComponentControl/icon/history64.png</file>
+        <file>ComponentControl/icon/history_b.png</file>
+        <file>ComponentControl/icon/home_b.png</file>
+        <file>ComponentControl/icon/home_w.png</file>
+        <file>ComponentControl/icon/loop_b.png</file>
+        <file>ComponentControl/icon/loop_one_b.png</file>
+        <file>ComponentControl/icon/loop_one_w.png</file>
+        <file>ComponentControl/icon/loop_w.png</file>
+        <file>ComponentControl/icon/music_b.png</file>
+        <file>ComponentControl/icon/music_w.png</file>
+        <file>ComponentControl/icon/next_10s_b.png</file>
+        <file>ComponentControl/icon/next_10s_w.png</file>
+        <file>ComponentControl/icon/next_b.png</file>
+        <file>ComponentControl/icon/next_w.png</file>
+        <file>ComponentControl/icon/pause_b.png</file>
+        <file>ComponentControl/icon/pause_w.png</file>
+        <file>ComponentControl/icon/playlist_b.png</file>
+        <file>ComponentControl/icon/playlist_w.png</file>
+        <file>ComponentControl/icon/playmusic.gif</file>
+        <file>ComponentControl/icon/previous_10s_b.png</file>
+        <file>ComponentControl/icon/previous_10s_w.png</file>
+        <file>ComponentControl/icon/previous_b.png</file>
+        <file>ComponentControl/icon/previous_w.png</file>
+        <file>ComponentControl/icon/search_b.png</file>
+        <file>ComponentControl/icon/search_w.png</file>
+        <file>ComponentControl/icon/shuffle_b.png</file>
+        <file>ComponentControl/icon/shuffle_w.png</file>
+        <file>ComponentControl/icon/videolist_b.png</file>
+        <file>ComponentControl/icon/videolist_w.png</file>
+        <file>ComponentControl/icon/volume_b.png</file>
+        <file>ComponentControl/icon/volume_w.png</file>
+        <file>ComponentControl/icon/zoom1_b.png</file>
+        <file>ComponentControl/icon/zoom1_w.png</file>
+        <file>ComponentControl/icon/zoom_in_b.png</file>
+        <file>ComponentControl/icon/zoom_in_w.png</file>
+        <file>ComponentControl/icon/zoom_out_b.png</file>
+        <file>ComponentControl/icon/zoom_out_w.png</file>
+        <file>ComponentControl/icon/folder_w.png</file>
+        <file>ComponentControl/icon/history_w.png</file>
+        <file>ComponentControl/icon/volume_off_b.png</file>
+        <file>ComponentControl/icon/volume_off_w.png</file>
     </qresource>
 </RCC>

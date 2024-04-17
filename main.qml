@@ -64,11 +64,23 @@ Window {
                     height: 50
                     color: "black"
 
-
                 }
 
                 PlayButton{
-                    width: 100
+                    id: playerBtn
+                    onClicked: {
+                        count++
+                        console.log("play: "+count)
+                    }
+                }
+
+
+                PauseButton{
+                    id: pauseBtn
+                    onClicked: {
+                        count++
+                        console.log("pause: "+count)
+                    }
                 }
 
             }

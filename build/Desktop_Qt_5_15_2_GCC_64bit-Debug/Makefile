@@ -760,6 +760,7 @@ compiler_rcc_clean:
 qrc_qml.cpp: ../../qml.qrc \
 		/home/antv15/Qt/5.15.2/gcc_64/bin/rcc \
 		../../main.qml \
+		../../ComponentControl/PauseButton.qml \
 		../../ComponentControl/PlayButton.qml \
 		../../ComponentControl/icon/play_b.png \
 		../../ComponentControl/icon/play_w.png
