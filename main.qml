@@ -63,19 +63,6 @@ Window {
             }
         }
 
-        // Rectangle{
-        //     id: r2
-        //     // width: rowViewID.width - rowViewID.width/3
-        //     width: rowViewID.width - r1.width
-        //     height: rowViewID.height
-        //     color: "#FFFFFF"
-        //     visible: true
-        //     Text {
-        //         id: name2
-        //         text: qsTr("text")
-        //     }
-        // }
-
         ViewMedia{
             id: viewAudioID
             width: rowViewID.width - r1.width
@@ -92,26 +79,43 @@ Window {
                     color: "red"
 
                     visible: true
+
+                    PlayButton{
+                        withBtn: 50
+
+                    }
                 }
                 Rectangle{
-                    id: controlMediaID
+                    id:itemControlMediaID
                     width: parent.width
                     height: 100
                     color: "springgreen"
                     visible: true
 
                     Row{
-                        anchors.fill: parent
-                        Rectangle{
+                        spacing: 2
+                        Rectangle {
                             id: inforMediaID
+                            color: "blue";
+                            width: itemControlMediaID.width/3
+                            height: itemControlMediaID.height
+                        }
+                        Rectangle {
+                            id: controlMediaID
+                            color: "green";
+                            width: itemControlMediaID.width - inforMediaID.width
+                            height: itemControlMediaID.height
 
-
+                            ScrollBarMedia{
+                                id: scb
+                                withScrollbar: parent.width
+                                heightScrollbar: 10
+                            }
                         }
                     }
                 }
             }
         }
-
 
     }
 

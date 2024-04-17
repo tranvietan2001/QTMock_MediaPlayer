@@ -761,6 +761,7 @@ qrc_qml.cpp: ../../qml.qrc \
 		/home/antv15/Qt/5.15.2/gcc_64/bin/rcc \
 		../../main.qml \
 		../../ComponentControl/NextButton.qml \
+		../../ComponentControl/ScrollBarMedia.qml \
 		../../ComponentControl/BackwardButton.qml \
 		../../ComponentControl/PreviousButton.qml \
 		../../ComponentControl/ForwardButton.qml \

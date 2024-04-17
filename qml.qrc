@@ -54,5 +54,6 @@
         <file>ComponentControl/ZoomInButton.qml</file>
         <file>ComponentControl/ZoomOutButton.qml</file>
         <file>ComponentControl/ViewMedia.qml</file>
+        <file>ComponentControl/ScrollBarMedia.qml</file>
     </qresource>
 </RCC>

@@ -2,9 +2,9 @@ import QtQuick 2.15
 
 Item {
     id: viewMediaID
-    width: with_view
+    width: widthView
 
-    property int with_view: 0
+    property int widthView: 0
 
     Rectangle{
         id: bgViewMediaID
