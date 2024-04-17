@@ -2,7 +2,7 @@ import QtQuick 2.15
 
 
 Item {
-    id: nextBtnID
+    id: shuffleBtnID
     width: widthBtn
     height: widthBtn
     signal clicked();
@@ -10,18 +10,18 @@ Item {
 
 
     Rectangle{
-        id: bgNextBtnID
+        id: bgShuffleBtnID
         anchors.fill: parent
         radius: parent.width / 2
         border.color: "darkcyan"
         visible: true
 
         Image {
-            id: iconNextID
-            width: nextBtnID.width/2
-            height: nextBtnID.height/2
+            id: iconShuffleID
+            width: shuffleBtnID.width/2
+            height: shuffleBtnID.height/2
             anchors.centerIn: parent
-            source: "./icon/previous_b.png"
+            source: "./icon/shuffle_b.png"
         }
     }
 
@@ -30,16 +30,16 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
-            nextBtnID.clicked()
+            shuffleBtnID.clicked()
         }
 
         onEntered:     {
-            bgNextBtnID.border.color = "darkorange"
-            bgNextBtnID.scale = 1.1
+            bgShuffleBtnID.border.color = "darkorange"
+            bgShuffleBtnID.scale = 1.1
         }
         onExited: {
-            bgNextBtnID.border.color = "darkcyan"
-            bgNextBtnID.scale = 1
+            bgShuffleBtnID.border.color = "darkcyan"
+            bgShuffleBtnID.scale = 1
         }
     }
 }

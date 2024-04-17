@@ -2,12 +2,12 @@ import QtQuick 2.15
 
 Item {
     id: itemScrollbarID
-    width: withScrollbar
+    width: widthScrollbar
     height: heightScrollbar
     signal clicked()
     signal pressed()
     signal released()
-    property int withScrollbar: 0
+    property int widthScrollbar: 0
     property int heightScrollbar: 0
 
     Rectangle{

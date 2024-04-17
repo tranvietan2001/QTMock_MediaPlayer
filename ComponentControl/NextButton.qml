@@ -3,10 +3,10 @@ import QtQuick 2.15
 
 Item {
     id: nextBtnID
-    width: withBtn
-    height: withBtn
+    width: widthBtn
+    height: widthBtn
     signal clicked();
-    property int withBtn: 0
+    property int widthBtn: 0
 
 
     Rectangle{
@@ -21,7 +21,7 @@ Item {
             width: nextBtnID.width/2
             height: nextBtnID.height/2
             anchors.centerIn: parent
-            source: "./icon/previous_10s_b.png"
+            source: "./icon/next_b.png"
         }
     }
 

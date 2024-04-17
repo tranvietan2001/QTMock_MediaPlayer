@@ -79,11 +79,6 @@ Window {
                     color: "red"
 
                     visible: true
-
-                    PlayButton{
-                        withBtn: 50
-
-                    }
                 }
                 Rectangle{
                     id:itemControlMediaID
@@ -106,11 +101,98 @@ Window {
                             width: itemControlMediaID.width - inforMediaID.width
                             height: itemControlMediaID.height
 
-                            ScrollBarMedia{
-                                id: scb
-                                withScrollbar: parent.width
-                                heightScrollbar: 10
+                            Column{
+                                anchors.fill: parent
+                                spacing: 1
+
+                                Rectangle{
+                                    width: parent.width
+                                    height: parent.height/2
+                                    color: "gray"
+                                }
+                                Rectangle{
+
+                                    width: parent.width
+                                    height: parent.height/2
+                                    color: "gray"
+
+                                    Row{
+                                        height: parent.height
+                                        spacing: 3
+                                        anchors.centerIn: parent
+
+                                        ShuffleButton{
+                                            id: sfBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter: parent.verticalCenter
+                                        }
+
+                                        PreviousButton{
+                                            id: preBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter:  parent.verticalCenter
+
+                                        }
+
+                                        BackwardButton{
+                                            id: bwBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter:  parent.verticalCenter
+                                        }
+
+                                        PlayButton{
+                                            id: playBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter:  parent.verticalCenter
+                                            visible: true
+
+                                            MouseArea{
+                                                anchors.fill: parent
+
+                                                onClicked: {
+                                                    playBtnID.visible = false
+                                                    pauseBtnID.visible = true
+
+                                                    console.log("Play Btn click")
+                                                }
+                                            }
+                                        }
+
+                                        PauseButton{
+                                            id: pauseBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter:  parent.verticalCenter
+                                            visible: false
+
+                                            onClicked: {
+                                                playBtnID.visible = true
+                                                pauseBtnID.visible = false
+
+                                                console.log("Pause Btn clicked")
+                                            }
+                                        }
+
+                                        ForwardButton{
+                                            id: fwBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter:  parent.verticalCenter
+
+                                        }
+
+                                        NextButton{
+                                            id: nextBtnID
+                                            widthBtn: 40
+                                            anchors.verticalCenter:  parent.verticalCenter
+                                        }
+                                    }
+                                }
                             }
+
+                            // ScrollBarMedia{
+                            //     id: scb
+                            //     withScrollbar: parent.width
+                            //     heightScrollbar: 10
+                            // }
                         }
                     }
                 }

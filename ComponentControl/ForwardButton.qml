@@ -3,10 +3,10 @@ import QtQuick 2.15
 
 Item {
     id: forwardBtnID
-    width: withBtn
-    height: withBtn
+    width: widthBtn
+    height: widthBtn
     signal clicked();
-    property int withBtn: 0
+    property int widthBtn: 0
 
 
     Rectangle{
