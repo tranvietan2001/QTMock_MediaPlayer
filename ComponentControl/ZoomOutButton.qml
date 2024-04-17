@@ -2,44 +2,43 @@ import QtQuick 2.15
 
 
 Item {
-    id: playBtnID
+    id: zoomOutBtnID
     width: 50
     height: 50
     signal clicked();
 
 
     Rectangle{
-        id: bgPlayBtnID
+        id: bgZoomOutBtnID
         anchors.fill: parent
         radius: parent.width / 2
         border.color: "darkcyan"
         visible: true
 
         Image {
-            id: iconPlayID
-            width: playBtnID.width/2
-            height: playBtnID.height/2
+            id: iconZoomOutID
+            width: zoomOutBtnID.width/2
+            height: zoomOutBtnID.height/2
             anchors.centerIn: parent
-            source: "./icon/play_b.png"
+            source: "./icon/zoom_out_b.png"
         }
     }
 
+
     MouseArea{
         anchors.fill: parent
-
         hoverEnabled: true
-
         onClicked: {
-            playBtnID.clicked()
+            zoomOutBtnID.clicked()
         }
 
         onEntered:     {
-            bgPlayBtnID.border.color = "darkorange"
-            bgPlayBtnID.scale = 1.1
+            bgZoomOutBtnID.border.color = "darkorange"
+            bgZoomOutBtnID.scale = 1.1
         }
         onExited: {
-            bgPlayBtnID.border.color = "darkcyan"
-            bgPlayBtnID.scale = 1
+            bgZoomOutBtnID.border.color = "darkcyan"
+            bgZoomOutBtnID.scale = 1
         }
     }
 }

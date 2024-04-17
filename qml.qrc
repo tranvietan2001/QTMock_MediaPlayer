@@ -47,5 +47,11 @@
         <file>ComponentControl/icon/history_w.png</file>
         <file>ComponentControl/icon/volume_off_b.png</file>
         <file>ComponentControl/icon/volume_off_w.png</file>
+        <file>ComponentControl/NextButton.qml</file>
+        <file>ComponentControl/PreviousButton.qml</file>
+        <file>ComponentControl/ForwardButton.qml</file>
+        <file>ComponentControl/BackwardButton.qml</file>
+        <file>ComponentControl/ZoomInButton.qml</file>
+        <file>ComponentControl/ZoomOutButton.qml</file>
     </qresource>
 </RCC>

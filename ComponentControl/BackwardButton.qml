@@ -2,44 +2,43 @@ import QtQuick 2.15
 
 
 Item {
-    id: playBtnID
+    id: backwardBtnID
     width: 50
     height: 50
     signal clicked();
 
 
     Rectangle{
-        id: bgPlayBtnID
+        id: bgBackwardBtnID
         anchors.fill: parent
         radius: parent.width / 2
         border.color: "darkcyan"
         visible: true
 
         Image {
-            id: iconPlayID
-            width: playBtnID.width/2
-            height: playBtnID.height/2
+            id: iconBackwardID
+            width: backwardBtnID.width/2
+            height: backwardBtnID.height/2
             anchors.centerIn: parent
-            source: "./icon/play_b.png"
+            source: "./icon/previous_10s_b.png"
         }
     }
 
+
     MouseArea{
         anchors.fill: parent
-
         hoverEnabled: true
-
         onClicked: {
-            playBtnID.clicked()
+            backwardBtnID.clicked()
         }
 
         onEntered:     {
-            bgPlayBtnID.border.color = "darkorange"
-            bgPlayBtnID.scale = 1.1
+            bgBackwardBtnID.border.color = "darkorange"
+            bgBackwardBtnID.scale = 1.1
         }
         onExited: {
-            bgPlayBtnID.border.color = "darkcyan"
-            bgPlayBtnID.scale = 1
+            bgBackwardBtnID.border.color = "darkcyan"
+            bgBackwardBtnID.scale = 1
         }
     }
 }

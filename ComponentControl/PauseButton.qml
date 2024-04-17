@@ -11,13 +11,13 @@ Item {
         id: bgPauseBtnID
         anchors.fill: parent
         radius: parent.width / 2
-        border.color: "red"
+        border.color: "darkcyan"
         visible: true
 
         Image {
             id: iconPauseID
-            width: pauseBtnID.width/3*2
-            height: pauseBtnID.height/3*2
+            width: pauseBtnID.width/2
+            height: pauseBtnID.height/2
             anchors.centerIn: parent
             source: "./icon/pause_b.png"
         }
@@ -25,8 +25,18 @@ Item {
 
     MouseArea{
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: {
             pauseBtnID.clicked()
+        }
+
+        onEntered:     {
+            bgPauseBtnID.border.color = "darkorange"
+            bgPauseBtnID.scale = 1.1
+        }
+        onExited: {
+            bgPauseBtnID.border.color = "darkcyan"
+            bgPauseBtnID.scale = 1
         }
     }
 }

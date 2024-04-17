@@ -760,10 +760,58 @@ compiler_rcc_clean:
 qrc_qml.cpp: ../../qml.qrc \
 		/home/antv15/Qt/5.15.2/gcc_64/bin/rcc \
 		../../main.qml \
+		../../ComponentControl/NextButton.qml \
+		../../ComponentControl/BackwardButton.qml \
+		../../ComponentControl/PreviousButton.qml \
+		../../ComponentControl/ForwardButton.qml \
+		../../ComponentControl/ZoomOutButton.qml \
 		../../ComponentControl/PauseButton.qml \
 		../../ComponentControl/PlayButton.qml \
+		../../ComponentControl/ZoomInButton.qml \
+		../../ComponentControl/icon/shuffle_w.png \
+		../../ComponentControl/icon/playlist_b.png \
+		../../ComponentControl/icon/volume_off_w.png \
+		../../ComponentControl/icon/home_w.png \
+		../../ComponentControl/icon/volume_b.png \
+		../../ComponentControl/icon/search_b.png \
+		../../ComponentControl/icon/play_w.png \
+		../../ComponentControl/icon/loop_one_w.png \
+		../../ComponentControl/icon/folder_w.png \
+		../../ComponentControl/icon/previous_10s_w.png \
+		../../ComponentControl/icon/next_w.png \
+		../../ComponentControl/icon/shuffle_b.png \
+		../../ComponentControl/icon/volume_off_b.png \
+		../../ComponentControl/icon/previous_w.png \
+		../../ComponentControl/icon/home_b.png \
+		../../ComponentControl/icon/next_10s_w.png \
+		../../ComponentControl/icon/zoom1_w.png \
 		../../ComponentControl/icon/play_b.png \
-		../../ComponentControl/icon/play_w.png
+		../../ComponentControl/icon/loop_one_b.png \
+		../../ComponentControl/icon/folder_b.png \
+		../../ComponentControl/icon/history64.png \
+		../../ComponentControl/icon/pause_w.png \
+		../../ComponentControl/icon/next_b.png \
+		../../ComponentControl/icon/previous_10s_b.png \
+		../../ComponentControl/icon/zoom_out_w.png \
+		../../ComponentControl/icon/videolist_w.png \
+		../../ComponentControl/icon/previous_b.png \
+		../../ComponentControl/icon/next_10s_b.png \
+		../../ComponentControl/icon/zoom1_b.png \
+		../../ComponentControl/icon/zoom_in_w.png \
+		../../ComponentControl/icon/music_w.png \
+		../../ComponentControl/icon/pause_b.png \
+		../../ComponentControl/icon/history_w.png \
+		../../ComponentControl/icon/zoom_out_b.png \
+		../../ComponentControl/icon/videolist_b.png \
+		../../ComponentControl/icon/playmusic.gif \
+		../../ComponentControl/icon/zoom_in_b.png \
+		../../ComponentControl/icon/loop_w.png \
+		../../ComponentControl/icon/music_b.png \
+		../../ComponentControl/icon/history_b.png \
+		../../ComponentControl/icon/playlist_w.png \
+		../../ComponentControl/icon/volume_w.png \
+		../../ComponentControl/icon/loop_b.png \
+		../../ComponentControl/icon/search_w.png
 	/home/antv15/Qt/5.15.2/gcc_64/bin/rcc -name qml ../../qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
