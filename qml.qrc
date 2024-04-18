@@ -2,8 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>ComponentControl/PlayButton.qml</file>
-        <file>ComponentControl/icon/play_b.png</file>
-        <file>ComponentControl/icon/play_w.png</file>
         <file>ComponentControl/PauseButton.qml</file>
         <file>ComponentControl/icon/folder_b.png</file>
         <file>ComponentControl/icon/history64.png</file>
@@ -20,8 +18,6 @@
         <file>ComponentControl/icon/next_10s_w.png</file>
         <file>ComponentControl/icon/next_b.png</file>
         <file>ComponentControl/icon/next_w.png</file>
-        <file>ComponentControl/icon/pause_b.png</file>
-        <file>ComponentControl/icon/pause_w.png</file>
         <file>ComponentControl/icon/playlist_b.png</file>
         <file>ComponentControl/icon/playlist_w.png</file>
         <file>ComponentControl/icon/playmusic.gif</file>
@@ -58,5 +54,9 @@
         <file>ComponentControl/ShuffleButton.qml</file>
         <file>ComponentControl/LoopButton.qml</file>
         <file>ComponentControl/LoopOneButton.qml</file>
+        <file>ComponentControl/icon/pause_b.png</file>
+        <file>ComponentControl/icon/pause_w.png</file>
+        <file>ComponentControl/icon/play_b.png</file>
+        <file>ComponentControl/icon/play_w.png</file>
     </qresource>
 </RCC>

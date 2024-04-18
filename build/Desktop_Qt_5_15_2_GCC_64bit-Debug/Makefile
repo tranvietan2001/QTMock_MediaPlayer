@@ -801,8 +801,8 @@ qrc_qml.cpp: ../../qml.qrc \
 		../../ComponentControl/icon/videolist_w.png \
 		../../ComponentControl/icon/previous_b.png \
 		../../ComponentControl/icon/next_10s_b.png \
-		../../ComponentControl/icon/zoom1_b.png \
 		../../ComponentControl/icon/zoom_in_w.png \
+		../../ComponentControl/icon/zoom1_b.png \
 		../../ComponentControl/icon/music_w.png \
 		../../ComponentControl/icon/pause_b.png \
 		../../ComponentControl/icon/history_w.png \

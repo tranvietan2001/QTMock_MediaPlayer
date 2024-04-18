@@ -7,7 +7,8 @@ Item {
     height: widthBtn
     signal clicked();
     property int widthBtn: 0
-    property int  sttLoopBtn: 0
+
+    property int sttLoopBtn: 0
 
 
     Rectangle{
@@ -26,15 +27,33 @@ Item {
         }
     }
 
+    Rectangle{
+        id: bgLoopOneBtnID
+        anchors.fill: parent
+        radius: parent.width / 2
+        border.color: "darkorange"
+        visible: false
+
+        Image {
+            id: iconLoopOneID
+            width: loopOneBtnID.width/2
+            height: loopOneBtnID.height/2
+            anchors.centerIn: parent
+            source: "./icon/loop_one_b.png"
+        }
+    }
+
+
+
 
     MouseArea{
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
+            sttLoopBtn = !sttLoopBtn
 
-
-            // if(sttLoopBtn == 0) bgLoopBtnID.color = "while"
-            // else if(sttLoopBtn == 2) bgLoopBtnID.color = "drakcyan"
+            if(sttLoopBtn) bgLoopBtnID.color= "darkcyan"
+            else bgLoopBtnID.color = "transparent"
 
             loopBtnID.clicked()
         }

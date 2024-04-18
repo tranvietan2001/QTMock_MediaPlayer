@@ -1,6 +1,5 @@
 import QtQuick 2.15
 
-
 Item {
     id: loopOneBtnID
     width: widthBtn
@@ -8,13 +7,17 @@ Item {
     signal clicked();
     property int widthBtn: 0
 
+    property bool sttLoopOneBtn: false
+
 
     Rectangle{
         id: bgLoopOneBtnID
         anchors.fill: parent
         radius: parent.width / 2
-        border.color: "darkcyan"
         visible: true
+
+        // color: "darkcyan"
+        border.color: "darkorange"
 
         Image {
             id: iconLoopOneID
@@ -29,12 +32,23 @@ Item {
     MouseArea{
         anchors.fill: parent
         hoverEnabled: true
+
+
         onClicked: {
+            sttLoopOneBtn = !sttLoopOneBtn
 
-            if(sttLoopBtn == 1)
+            if(sttLoopOneBtn){
+                bgLoopOneBtnID.color = "darkcyan"
+                bgLoopOneBtnID.border.color = "darkorange"
+            }
 
+            else{
+                bgLoopOneBtnID.color = "transparent"
+                bgLoopOneBtnID.border.color = "darkcyan"
+            }
 
             loopOneBtnID.clicked()
+
 
         }
 
