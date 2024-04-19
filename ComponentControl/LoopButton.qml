@@ -7,7 +7,6 @@ Item {
     height: widthBtn
     signal clicked();
     property int widthBtn: 0
-
     property int sttLoopBtn: 0
 
 
@@ -24,36 +23,45 @@ Item {
             height: loopBtnID.height/2
             anchors.centerIn: parent
             source: "./icon/loop_b.png"
-        }
-    }
+            visible: true
 
-    Rectangle{
-        id: bgLoopOneBtnID
-        anchors.fill: parent
-        radius: parent.width / 2
-        border.color: "darkorange"
-        visible: false
+        }
 
         Image {
             id: iconLoopOneID
-            width: loopOneBtnID.width/2
-            height: loopOneBtnID.height/2
+            width: loopBtnID.width/2
+            height: loopBtnID.height/2
             anchors.centerIn: parent
             source: "./icon/loop_one_b.png"
+            visible: false
+
         }
     }
-
-
-
 
     MouseArea{
         anchors.fill: parent
         hoverEnabled: true
         onClicked: {
-            sttLoopBtn = !sttLoopBtn
+            sttLoopBtn++
+            if (sttLoopBtn > 2) sttLoopBtn = 0
 
-            if(sttLoopBtn) bgLoopBtnID.color= "darkcyan"
-            else bgLoopBtnID.color = "transparent"
+            if(sttLoopBtn == 0){
+                bgLoopBtnID.color = "transparent"
+                bgLoopBtnID.border.color = "darkcyan"
+                iconLoopID.visible = true
+                iconLoopOneID.visible = false
+            }
+            else if(sttLoopBtn == 1){
+                bgLoopBtnID.color = "darkcyan"
+                bgLoopBtnID.border.color = "darkorange"
+                iconLoopID.visible = false
+                iconLoopOneID.visible = true
+            }else if(sttLoopBtn == 2){
+                bgLoopBtnID.color = "darkcyan"
+                bgLoopBtnID.border.color = "darkorange"
+                iconLoopID.visible = true
+                iconLoopOneID.visible = false
+            }
 
             loopBtnID.clicked()
         }

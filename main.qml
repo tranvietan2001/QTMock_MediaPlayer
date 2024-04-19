@@ -145,8 +145,6 @@ Window {
                                             anchors.verticalCenter:  parent.verticalCenter
                                         }
 
-                                        PlayButton{
-                                        }
 
                                         PlayButton{
                                             id: playBtnID
@@ -185,7 +183,7 @@ Window {
 
                                             onClicked: {
 
-                                                // console.log(sttLoopBtn)
+                                                console.log(sttLoopBtn)
                                             }
                                         }
 
