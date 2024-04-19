@@ -38,7 +38,7 @@ Window {
                     id: musicTabBtnID
                     widthBtn: parent.width
                     heightBtn: 30
-                    nameBtn: "Music"
+                    nameBtn: "Music List"
                     pathImg: "qrc:/ComponentControl/icon/playlist_b.png"
                 }
 
@@ -46,29 +46,15 @@ Window {
                     id: videoTabBtnID
                     widthBtn: parent.width
                     heightBtn: 30
-                    nameBtn: "Music"
+                    nameBtn: "Video List"
                     pathImg: "qrc:/ComponentControl/icon/videolist_b.png"
                 }
-
-                Rectangle{
-                    id: videoRecID
-                    width: parent.width
-                    height: 50
-                    color: "black"
-                }
-
-                Rectangle{
-                    id: historyRecID
-                    width: parent.width
-                    height: 50
-                    color: "black"
-                }
-                Rectangle{
-                    id: settingRecID
-                    width: parent.width
-                    height: 50
-                    color: "black"
-
+                TabButton{
+                    id: historyTabBtnID
+                    widthBtn: parent.width
+                    heightBtn: 30
+                    nameBtn: "History"
+                    pathImg: "qrc:/ComponentControl/icon/history_b.png"
                 }
 
             }
