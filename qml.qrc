@@ -58,5 +58,6 @@
         <file>ComponentControl/icon/pause_w.png</file>
         <file>ComponentControl/icon/play_b.png</file>
         <file>ComponentControl/icon/play_w.png</file>
+        <file>ComponentControl/TabButton.qml</file>
     </qresource>
 </RCC>

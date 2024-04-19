@@ -773,6 +773,7 @@ qrc_qml.cpp: ../../qml.qrc \
 		../../ComponentControl/ZoomInButton.qml \
 		../../ComponentControl/ShuffleButton.qml \
 		../../ComponentControl/ViewMedia.qml \
+		../../ComponentControl/TabButton.qml \
 		../../ComponentControl/icon/shuffle_w.png \
 		../../ComponentControl/icon/playlist_b.png \
 		../../ComponentControl/icon/volume_off_w.png \

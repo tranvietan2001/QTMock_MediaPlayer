@@ -26,18 +26,28 @@ Window {
                 spacing: 2
                 anchors.fill: parent
 
-                Rectangle{
-                    id: homeRecID
-                    width: parent.width
-                    height: 50
-                    color: "black"
+                TabButton{
+                    id: homeTabBtnID
+                    widthBtn: parent.width
+                    heightBtn: 30
+                    nameBtn: "Home"
+                    pathImg: "qrc:/ComponentControl/icon/home_b.png"
                 }
 
-                Rectangle{
-                    id: audioRecID
-                    width: parent.width
-                    height: 50
-                    color: "black"
+                TabButton{
+                    id: musicTabBtnID
+                    widthBtn: parent.width
+                    heightBtn: 30
+                    nameBtn: "Music"
+                    pathImg: "qrc:/ComponentControl/icon/playlist_b.png"
+                }
+
+                TabButton{
+                    id: videoTabBtnID
+                    widthBtn: parent.width
+                    heightBtn: 30
+                    nameBtn: "Music"
+                    pathImg: "qrc:/ComponentControl/icon/videolist_b.png"
                 }
 
                 Rectangle{
