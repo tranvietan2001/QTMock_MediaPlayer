@@ -25,8 +25,6 @@ Item {
         border.width: 1
         border.color: colorTimeLine
 
-
-
         Rectangle{
             id: bgTimeLineID
             width: positionPoint

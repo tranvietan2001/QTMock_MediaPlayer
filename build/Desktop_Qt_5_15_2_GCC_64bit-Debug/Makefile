@@ -818,7 +818,9 @@ qrc_qml.cpp: ../../qml.qrc \
 		../../ComponentControl/icon/playlist_w.png \
 		../../ComponentControl/icon/volume_w.png \
 		../../ComponentControl/icon/loop_b.png \
-		../../ComponentControl/icon/search_w.png
+		../../ComponentControl/icon/search_w.png \
+		../../ComponentControl/img/Record.png \
+		../../ComponentControl/img/playerMusic.png
 	/home/an/Qt/5.15.2/gcc_64/bin/rcc -name qml ../../qml.qrc -o qrc_qml.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

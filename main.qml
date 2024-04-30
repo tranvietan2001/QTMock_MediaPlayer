@@ -92,16 +92,54 @@ Window {
                             color: "blue";
                             width: itemControlMediaID.width/3
                             height: itemControlMediaID.height
+
+                            Row{
+                                spacing: 1
+
+                                Rectangle{
+
+                                    width: inforMediaID.height
+                                    height: width
+                                    color: "gray"
+
+                                    Image{
+                                        id: imgInforMediaID
+                                        width: parent.width -20
+                                        height: width
+                                        anchors.centerIn: parent
+                                        source: "qrc:/ComponentControl/img/playerMusic.png"
+                                        smooth: true
+                                    }
+
+                                    RotationAnimation {
+                                        id: rotationAnim
+                                        target: imgInforMediaID
+                                        property: "rotation"
+                                        from: 0
+                                        to: 360
+                                        duration: 2000  // Thời gian hoàn thành một vòng xoay (ms)
+                                        running: true // ==>play -> true, stop-> false
+                                        loops: Animation.Infinite  // Lặp vô hạn
+                                    }
+
+                                }
+
+                                Rectangle{
+                                    width: inforMediaID.width - imgInforMediaID.width
+                                    height: 50
+                                    color: "gray"
+                                }
+                            }
                         }
+
                         Rectangle {
                             id: controlMediaID
-                            color: "green";
+                            // color: "green";
                             width: itemControlMediaID.width - inforMediaID.width
                             height: itemControlMediaID.height
 
                             Column{
                                 anchors.fill: parent
-                                // spacing: 1
 
                                 Rectangle{
                                     width: parent.width
@@ -111,8 +149,9 @@ Window {
                                     Row{
                                         width: parent.width
                                         height: parent.height
+                                        spacing: 3
                                         Rectangle{
-                                            width: parent.width *20/100
+                                            width: parent.width *15/100
                                             height: parent.height
                                             color: "transparent"
 
@@ -124,7 +163,7 @@ Window {
 
                                         }
                                         Rectangle{
-                                            width: parent.width *60/100
+                                            width: parent.width *70/100
                                             height: parent.height
                                             // color: "red"
 
@@ -143,7 +182,7 @@ Window {
 
                                         }
                                         Rectangle{
-                                            width: parent.width *20/100
+                                            width: parent.width *15/100
                                             height: parent.height
                                             color: "transparent"
 
