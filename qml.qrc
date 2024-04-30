@@ -59,5 +59,6 @@
         <file>ComponentControl/icon/play_b.png</file>
         <file>ComponentControl/icon/play_w.png</file>
         <file>ComponentControl/TabButton.qml</file>
+        <file>ComponentControl/MediaProgressBar.qml</file>
     </qresource>
 </RCC>

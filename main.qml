@@ -86,7 +86,7 @@ Window {
                     visible: true
 
                     Row{
-                        spacing: 2
+                        // spacing: 2
                         Rectangle {
                             id: inforMediaID
                             color: "blue";
@@ -101,12 +101,64 @@ Window {
 
                             Column{
                                 anchors.fill: parent
-                                spacing: 1
+                                // spacing: 1
 
                                 Rectangle{
                                     width: parent.width
                                     height: parent.height/3
-                                    color: "gray"
+                                    // color: "gray"
+
+                                    Row{
+                                        width: parent.width
+                                        height: parent.height
+                                        Rectangle{
+                                            width: parent.width *20/100
+                                            height: parent.height
+                                            color: "transparent"
+
+                                            Text {
+                                                id: positionPlayerID
+                                                text: "00:00"
+                                                anchors.centerIn: parent
+                                            }
+
+                                        }
+                                        Rectangle{
+                                            width: parent.width *60/100
+                                            height: parent.height
+                                            // color: "red"
+
+                                            MediaProgressBar{
+                                                id: progressPlayerID
+                                                width: parent.width
+                                                height: 10
+                                                anchors.centerIn: parent
+                                                sizePoint: 20
+
+                                                // colorBackground: "black"
+                                                colorTimeLine: "darkcyan"
+                                                colorPoint: "darkorange"
+
+                                            }
+
+                                        }
+                                        Rectangle{
+                                            width: parent.width *20/100
+                                            height: parent.height
+                                            color: "transparent"
+
+                                            Text {
+                                                id: durationPlayerID
+                                                text: "00:00"
+                                                anchors.centerIn: parent
+                                            }
+
+                                        }
+
+                                    }
+
+
+
                                 }
                                 Rectangle{
 
@@ -116,7 +168,7 @@ Window {
 
                                     Row{
                                         height: parent.height
-                                        spacing: 3
+                                        spacing: 5
                                         anchors.centerIn: parent
 
                                         ShuffleButton{
