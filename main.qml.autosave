@@ -116,7 +116,7 @@ Window {
                             color: "transparent";
                             width: itemControlMediaID.width/3
                             height: itemControlMediaID.height
-
+    
                             Row{
                                 spacing: 1
 

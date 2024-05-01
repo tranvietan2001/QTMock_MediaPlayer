@@ -62,5 +62,9 @@
         <file>ComponentControl/MediaProgressBar.qml</file>
         <file>ComponentControl/img/Record.png</file>
         <file>ComponentControl/img/playerMusic.png</file>
+        <file>GUI/MusicList.qml</file>
+        <file>GUI/VideoList.qml</file>
+        <file>GUI/HomeView.qml</file>
+        <file>GUI/HistoryView.qml</file>
     </qresource>
 </RCC>

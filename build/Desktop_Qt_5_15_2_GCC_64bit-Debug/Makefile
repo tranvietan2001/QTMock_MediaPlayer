@@ -760,6 +760,10 @@ compiler_rcc_clean:
 qrc_qml.cpp: ../../qml.qrc \
 		/home/an/Qt/5.15.2/gcc_64/bin/rcc \
 		../../main.qml \
+		../../GUI/VideoList.qml \
+		../../GUI/HistoryView.qml \
+		../../GUI/HomeView.qml \
+		../../GUI/MusicList.qml \
 		../../ComponentControl/NextButton.qml \
 		../../ComponentControl/ScrollBarMedia.qml \
 		../../ComponentControl/MediaProgressBar.qml \
