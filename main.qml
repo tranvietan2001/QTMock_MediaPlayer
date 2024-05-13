@@ -14,7 +14,7 @@ Window {
         anchors.fill: parent
 
         Rectangle{
-            id: r1
+            id: recTab
             // width: rowViewID.width/3
             width: 200
             height: rowViewID.height
@@ -56,7 +56,6 @@ Window {
                     heightBtn: 30
                     nameBtn: "Video List"
                     pathImg: "qrc:/ComponentControl/icon/videolist_b.png"
-
                     onClicked: {
                         loaderViewAreaID.source = "qrc:/GUI/VideoList.qml"
                     }
@@ -72,41 +71,36 @@ Window {
                         loaderViewAreaID.source = "qrc:/GUI/HistoryView.qml"
                     }
                 }
-
             }
         }
 
-        ViewMedia{
-            id: viewAudioID
-            width: rowViewID.width - r1.width
-            height: rowViewID.height
-            // color: "#FFFFFF"
-            visible: true
+        Rectangle{
+            id: viewMediaId
+            width: parent.width - recTab.width
+            height: parent.height
+            // visible: true
 
             Column{
+                spacing: 2
                 anchors.fill: parent
-
-                Loader{
-                    id: loaderViewAreaID
+                Rectangle{
+                    id: viewArea
                     width: parent.width
-                    height: parent.height - controlMediaID.height
-                    source: "qrc:/GUI/MusicList.qml"
+                    height: parent.height - itemControlMediaID.height
+                    border.width: 5
+                    border.color: "black"
+                    Loader{
+                        id: loaderViewAreaID
+                        anchors.fill: viewArea
+                        source: "qrc:/GUI/HomeView.qml"
+                    }
                 }
-
-                // Rectangle{
-                //     id: viewAreaID
-                //     width: parent.width
-                //     height: parent.height - controlMediaID.height
-                //     color: "red"
-                //     visible: true
-
-                // }
 
                 Rectangle{
                     id:itemControlMediaID
                     width: parent.width
                     height: 100
-                    // color: "springgreen"
+                    color: "springgreen"
                     visible: true
 
                     Row{
@@ -241,6 +235,8 @@ Window {
                                             anchors.verticalCenter: parent.verticalCenter
                                             onClicked: {
                                                 console.log(statusShuffle)
+
+                                                console.log(viewMediaId.width + "====" + viewMediaId.height)
                                             }
                                         }
 
@@ -286,6 +282,8 @@ Window {
                                             id: nextBtnID
                                             widthBtn: 40
                                             anchors.verticalCenter:  parent.verticalCenter
+                                            onClicked: {
+                                            }
                                         }
 
                                         LoopButton{

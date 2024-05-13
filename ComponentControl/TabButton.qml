@@ -72,7 +72,4 @@ Item {
             tabBtnID.color = "transparent"
         }
     }
-
-
-
 }

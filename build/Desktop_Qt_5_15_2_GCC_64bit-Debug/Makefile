@@ -40,7 +40,7 @@ DISTNAME      = MediaPlayer1.0.0
 DISTDIR = /home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/build/Desktop_Qt_5_15_2_GCC_64bit-Debug/.tmp/MediaPlayer1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/an/Qt/5.15.2/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/an/Qt/5.15.2/gcc_64/lib/libQt5Quick.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Gui.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5QmlModels.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Qml.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Network.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) -ltag /home/an/Qt/5.15.2/gcc_64/lib/libQt5Quick.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Gui.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5QmlModels.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Qml.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Network.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -52,8 +52,16 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../main.cpp qrc_qml.cpp
-OBJECTS       = main.o \
+SOURCES       = ../../Controller/MediaController.cpp \
+		../../InforMedia.cpp \
+		../../Model/SongModel.cpp \
+		../../VideoModel.cpp \
+		../../main.cpp qrc_qml.cpp
+OBJECTS       = MediaController.o \
+		InforMedia.o \
+		SongModel.o \
+		VideoModel.o \
+		main.o \
 		qrc_qml.o
 DIST          = /home/an/Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/an/Qt/5.15.2/gcc_64/mkspecs/common/unix.conf \
@@ -269,7 +277,14 @@ DIST          = /home/an/Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/an/Qt/5.15.2/gcc_64/mkspecs/features/exceptions.prf \
 		/home/an/Qt/5.15.2/gcc_64/mkspecs/features/yacc.prf \
 		/home/an/Qt/5.15.2/gcc_64/mkspecs/features/lex.prf \
-		../../../../MediaPlayer.pro  ../../main.cpp
+		../../../../MediaPlayer.pro ../../Controller/MediaController.h \
+		../../InforMedia.h \
+		../../Model/SongModel.h \
+		../../VideoModel.h ../../Controller/MediaController.cpp \
+		../../InforMedia.cpp \
+		../../Model/SongModel.cpp \
+		../../VideoModel.cpp \
+		../../main.cpp
 QMAKE_TARGET  = MediaPlayer
 DESTDIR       = 
 TARGET        = MediaPlayer
@@ -730,7 +745,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/an/Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Controller/MediaController.h ../../InforMedia.h ../../Model/SongModel.h ../../VideoModel.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Controller/MediaController.cpp ../../InforMedia.cpp ../../Model/SongModel.cpp ../../VideoModel.cpp ../../main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -848,6 +864,18 @@ compiler_lex_clean:
 compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean 
 
 ####### Compile
+
+MediaController.o: ../../Controller/MediaController.cpp ../../Controller/MediaController.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MediaController.o ../../Controller/MediaController.cpp
+
+InforMedia.o: ../../InforMedia.cpp ../../InforMedia.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o InforMedia.o ../../InforMedia.cpp
+
+SongModel.o: ../../Model/SongModel.cpp ../../Model/SongModel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SongModel.o ../../Model/SongModel.cpp
+
+VideoModel.o: ../../VideoModel.cpp ../../VideoModel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o VideoModel.o ../../VideoModel.cpp
 
 main.o: ../../main.cpp /home/an/Qt/5.15.2/gcc_64/include/QtGui/QGuiApplication \
 		/home/an/Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
