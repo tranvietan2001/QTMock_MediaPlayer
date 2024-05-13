@@ -53,14 +53,14 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../Controller/MediaController.cpp \
-		../../InforMedia.cpp \
 		../../Model/SongModel.cpp \
-		../../VideoModel.cpp \
+		../../Model/VideoModel.cpp \
+		../../View/InforMediaFile.cpp \
 		../../main.cpp qrc_qml.cpp
 OBJECTS       = MediaController.o \
-		InforMedia.o \
 		SongModel.o \
 		VideoModel.o \
+		InforMediaFile.o \
 		main.o \
 		qrc_qml.o
 DIST          = /home/an/Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
@@ -278,12 +278,12 @@ DIST          = /home/an/Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/an/Qt/5.15.2/gcc_64/mkspecs/features/yacc.prf \
 		/home/an/Qt/5.15.2/gcc_64/mkspecs/features/lex.prf \
 		../../../../MediaPlayer.pro ../../Controller/MediaController.h \
-		../../InforMedia.h \
 		../../Model/SongModel.h \
-		../../VideoModel.h ../../Controller/MediaController.cpp \
-		../../InforMedia.cpp \
+		../../Model/VideoModel.h \
+		../../View/InforMediaFile.h ../../Controller/MediaController.cpp \
 		../../Model/SongModel.cpp \
-		../../VideoModel.cpp \
+		../../Model/VideoModel.cpp \
+		../../View/InforMediaFile.cpp \
 		../../main.cpp
 QMAKE_TARGET  = MediaPlayer
 DESTDIR       = 
@@ -745,8 +745,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../qml.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /home/an/Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../Controller/MediaController.h ../../InforMedia.h ../../Model/SongModel.h ../../VideoModel.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../Controller/MediaController.cpp ../../InforMedia.cpp ../../Model/SongModel.cpp ../../VideoModel.cpp ../../main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Controller/MediaController.h ../../Model/SongModel.h ../../Model/VideoModel.h ../../View/InforMediaFile.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../Controller/MediaController.cpp ../../Model/SongModel.cpp ../../Model/VideoModel.cpp ../../View/InforMediaFile.cpp ../../main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -868,14 +868,14 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean
 MediaController.o: ../../Controller/MediaController.cpp ../../Controller/MediaController.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MediaController.o ../../Controller/MediaController.cpp
 
-InforMedia.o: ../../InforMedia.cpp ../../InforMedia.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o InforMedia.o ../../InforMedia.cpp
-
 SongModel.o: ../../Model/SongModel.cpp ../../Model/SongModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SongModel.o ../../Model/SongModel.cpp
 
-VideoModel.o: ../../VideoModel.cpp ../../VideoModel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o VideoModel.o ../../VideoModel.cpp
+VideoModel.o: ../../Model/VideoModel.cpp ../../Model/VideoModel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o VideoModel.o ../../Model/VideoModel.cpp
+
+InforMediaFile.o: ../../View/InforMediaFile.cpp ../../View/InforMediaFile.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o InforMediaFile.o ../../View/InforMediaFile.cpp
 
 main.o: ../../main.cpp /home/an/Qt/5.15.2/gcc_64/include/QtGui/QGuiApplication \
 		/home/an/Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \

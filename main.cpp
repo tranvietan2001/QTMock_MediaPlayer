@@ -8,6 +8,11 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app(argc, argv);
 
+    // fix lỗi QML Settings: The following application identifiers have not been set: QVector("organizationName", "organizationDomain")
+    app.setOrganizationName("MediaPlayerApp");
+    app.setOrganizationDomain("MediaPlayerApp.xxx");
+
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

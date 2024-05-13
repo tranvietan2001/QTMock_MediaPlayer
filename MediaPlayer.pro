@@ -6,9 +6,9 @@ QT += quick
 LIBS += -ltag
 SOURCES += \
         Controller/MediaController.cpp \
-        InforMedia.cpp \
         Model/SongModel.cpp \
-        VideoModel.cpp \
+        Model/VideoModel.cpp \
+        View/InforMediaFile.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -26,6 +26,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Controller/MediaController.h \
-    InforMedia.h \
     Model/SongModel.h \
-    VideoModel.h
+    Model/VideoModel.h \
+    View/InforMediaFile.h
