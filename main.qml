@@ -1,6 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import "ComponentControl"
+
+import SongModel 1.0
+
 Window {
     width: 1390
     height: 750
@@ -12,6 +15,7 @@ Window {
     Row{
         id: rowViewID
         anchors.fill: parent
+        spacing: 2
 
         Rectangle{
             id: recTab
@@ -87,8 +91,8 @@ Window {
                     id: viewArea
                     width: parent.width
                     height: parent.height - itemControlMediaID.height
-                    border.width: 5
-                    border.color: "black"
+                    // border.width: 5
+                    // border.color: "black"
                     Loader{
                         id: loaderViewAreaID
                         anchors.fill: viewArea

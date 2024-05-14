@@ -17,9 +17,19 @@ QString InforMediaFile::getFileName() const
     return m_fileName;
 }
 
+void InforMediaFile::setFileName(const QString &newFileName)
+{
+    m_fileName = newFileName;
+}
+
+QString InforMediaFile::getTitleName() const
+{
+    return m_titleName;
+}
+
 void InforMediaFile::setTitleName(const QString &newTitleName)
 {
-    m_fileName = newTitleName;
+    m_titleName = newTitleName;
 }
 
 QString InforMediaFile::getArtistName() const

@@ -16,7 +16,8 @@
 class SongModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(QString pathFolder READ pathFolder WRITE setPathFolder NOTIFY pathFolderMusdicChanged FINAL);
+    Q_PROPERTY(QString pathFolderSong READ pathFolderSong WRITE setPathFolderSong NOTIFY pathFolderSongChanged FINAL)
+    Q_PROPERTY(QString pathFilesSong READ pathFilesSong WRITE setPathFilesSong NOTIFY pathFilesSongChanged FINAL)
 
 public:
     enum Role{
@@ -30,22 +31,27 @@ public:
     };
 
     SongModel(QObject *parent = nullptr);
-
-    QString pathFolder() const;
-    void setPathFolder(const QString &newPathFolder);
-
-
     virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
     virtual QHash<int,QByteArray> roleNames() const;
 
 
+
+    QString pathFolderSong() const;
+    void setPathFolderSong(const QString &newPathFolderSong);
+
+    QString pathFilesSong() const;
+    void setPathFilesSong(const QString &newPathFilesSong);
+
 signals:
-    void pathFolderMusdicChanged();
+    void pathFolderSongChanged();
+
+    void pathFilesSongChanged();
 
 private:
     QList<InforMediaFile> m_inforData;
-    QString m_pathFolder;
+    QString m_pathFolderSong;
+    QString m_pathFilesSong;
 };
 
 #endif // SONGMODEL_H

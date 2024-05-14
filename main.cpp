@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "Model/SongModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,8 +13,10 @@ int main(int argc, char *argv[])
     app.setOrganizationName("MediaPlayerApp");
     app.setOrganizationDomain("MediaPlayerApp.xxx");
 
-
     QQmlApplicationEngine engine;
+
+    qmlRegisterType<SongModel>("SongModel", 1,0,"SongModel");
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(
         &engine,
