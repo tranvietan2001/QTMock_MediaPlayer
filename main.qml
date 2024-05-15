@@ -3,6 +3,7 @@ import QtQuick.Window 2.15
 import "ComponentControl"
 
 import SongModel 1.0
+import MediaController 1.0
 
 Window {
     width: 1390
@@ -11,6 +12,15 @@ Window {
     minimumHeight: 400
     visible: true
     title: qsTr("Media Player")
+
+    MediaController{
+        id: songController
+    }
+
+    SongModel{
+        id: songModel
+    }
+
 
     Row{
         id: rowViewID
@@ -280,6 +290,10 @@ Window {
                                             widthBtn: 40
                                             anchors.verticalCenter:  parent.verticalCenter
 
+                                            onClicked: {
+songModel.updateModel()
+                                            }
+
                                         }
 
                                         NextButton{
@@ -287,6 +301,8 @@ Window {
                                             widthBtn: 40
                                             anchors.verticalCenter:  parent.verticalCenter
                                             onClicked: {
+                                                // if load view nào thì điêuf khiển song hay video
+                                                songController.processListData()
                                             }
                                         }
 
@@ -317,6 +333,21 @@ Window {
         }
 
     }
+
+
+    Timer {
+        interval: 1000 // 1 giây
+        running: true
+        repeat: true
+
+        onTriggered: {
+            songController.processListData()
+            console.log("====> update <====")
+            // running = false; // Dừng Timer
+            // destroy(); // Giải phóng bộ nhớ
+        }
+    }
+
 
     MouseArea{
         //760x400

@@ -3,6 +3,7 @@ import QtQuick 2.15
 import QtQuick.Dialogs 1.3
 
 import SongModel 1.0
+// import MediaController 1.0
 
 Item {
     id: homeView
@@ -12,6 +13,10 @@ Item {
     property string txtColorO: "darkorange"
     property string txtColorB: "black"
     property int contentYMax: 0
+
+    // MediaController{
+    //     id: songController
+    // }
 
     SongModel{
         id: songModelCpp
@@ -334,17 +339,17 @@ Item {
             width: 10
             height: listViewSong.height
             y: listViewSong.y
-            color: "red"
+            color: "darkcyan"
             anchors.right: parent.right
-            opacity: 0.5
+            // opacity: 0.5
             radius: width/2
             visible: false
 
             Rectangle{
                 id: scrollPoint
                 width: parent.width
-                height: 20
-                color: "green"
+                height: 40
+                color: "darkorange"
                 radius: width/2
 
 

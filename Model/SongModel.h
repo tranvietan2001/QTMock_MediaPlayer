@@ -19,6 +19,7 @@ class SongModel : public QAbstractListModel
     Q_PROPERTY(QString pathFolderSong READ pathFolderSong WRITE setPathFolderSong NOTIFY pathFolderSongChanged FINAL)
     Q_PROPERTY(QString pathFilesSong READ pathFilesSong WRITE setPathFilesSong NOTIFY pathFilesSongChanged FINAL)
 
+    Q_PROPERTY(QList<InforMediaFile> inforData READ getInforData NOTIFY inforDataChanged)
 public:
     enum Role{
         FileNameRole = Qt::UserRole +1,
@@ -35,18 +36,23 @@ public:
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const ;
     virtual QHash<int,QByteArray> roleNames() const;
 
-
-
     QString pathFolderSong() const;
     void setPathFolderSong(const QString &newPathFolderSong);
 
     QString pathFilesSong() const;
     void setPathFilesSong(const QString &newPathFilesSong);
 
+    QList<InforMediaFile> getInforData() const;
+    void setInforData(const QString &fileName, const QString &titleName,const QString &artistName,const QString &albumName,const int &durationM,const QString &pathCoverImage);
+
 signals:
     void pathFolderSongChanged();
-
     void pathFilesSongChanged();
+
+    void inforDataChanged();
+
+public slots:
+//qml call
 
 private:
     QList<InforMediaFile> m_inforData;

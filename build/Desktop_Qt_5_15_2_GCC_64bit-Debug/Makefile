@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_QUICK_LIB -DQT_MULTIMEDIA_LIB -DQT_GUI_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -Wextra -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../../../QTMock_MediaPlayer -I. -I/home/an/Qt/5.15.2/gcc_64/include -I/home/an/Qt/5.15.2/gcc_64/include/QtQuick -I/home/an/Qt/5.15.2/gcc_64/include/QtGui -I/home/an/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/an/Qt/5.15.2/gcc_64/include/QtQml -I/home/an/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/an/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/libdrm -I/home/an/Qt/5.15.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../../../QTMock_MediaPlayer -I. -I../../library/include -I/home/an/Qt/5.15.2/gcc_64/include -I/home/an/Qt/5.15.2/gcc_64/include/QtQuick -I/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia -I/home/an/Qt/5.15.2/gcc_64/include/QtGui -I/home/an/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/an/Qt/5.15.2/gcc_64/include/QtQml -I/home/an/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/an/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/libdrm -I/home/an/Qt/5.15.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/an/Qt/5.15.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = MediaPlayer1.0.0
 DISTDIR = /home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/build/Desktop_Qt_5_15_2_GCC_64bit-Debug/.tmp/MediaPlayer1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/an/Qt/5.15.2/gcc_64/lib
-LIBS          = $(SUBLIBS) -ltag /home/an/Qt/5.15.2/gcc_64/lib/libQt5Quick.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Gui.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5QmlModels.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Qml.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Network.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer//library/lib/libtag.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Quick.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Multimedia.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Gui.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5QmlModels.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Qml.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Network.so /home/an/Qt/5.15.2/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -57,6 +57,7 @@ SOURCES       = ../../Controller/MediaController.cpp \
 		../../Model/VideoModel.cpp \
 		../../View/InforMediaFile.cpp \
 		../../main.cpp qrc_qml.cpp \
+		moc_MediaController.cpp \
 		moc_SongModel.cpp
 OBJECTS       = MediaController.o \
 		SongModel.o \
@@ -64,6 +65,7 @@ OBJECTS       = MediaController.o \
 		InforMediaFile.o \
 		main.o \
 		qrc_qml.o \
+		moc_MediaController.o \
 		moc_SongModel.o
 DIST          = /home/an/Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/an/Qt/5.15.2/gcc_64/mkspecs/common/unix.conf \
@@ -851,9 +853,116 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /home/an/Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -dM -E -o moc_predefs.h /home/an/Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_SongModel.cpp
+compiler_moc_header_make_all: moc_MediaController.cpp moc_SongModel.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_SongModel.cpp
+	-$(DEL_FILE) moc_MediaController.cpp moc_SongModel.cpp
+moc_MediaController.cpp: ../../Controller/MediaController.h \
+		../../Model/SongModel.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QObject \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qnamespace.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qconfig.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qtcore-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsysinfo.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qlogging.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qflags.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmutex.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qnumeric.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qversiontagging.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstring.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qchar.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qbytearray.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qrefcount.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qarraydata.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringliteral.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringview.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qlist.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qalgorithms.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qiterator.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qpair.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qvector.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qpoint.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringlist.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qregexp.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcoreevent.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmetatype.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QAbstractListModel \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmap.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qdebug.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qhash.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qtextstream.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qiodevice.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qlocale.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qshareddata.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qset.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QDebug \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QString \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QDir \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qdir.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfileinfo.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../library/include/taglib/taglib.h \
+		../../library/include/taglib/taglib_config.h \
+		../../library/include/taglib/fileref.h \
+		../../library/include/taglib/tfile.h \
+		../../library/include/taglib/taglib_export.h \
+		../../library/include/taglib/tag.h \
+		../../library/include/taglib/tstring.h \
+		../../library/include/taglib/tbytevector.h \
+		../../library/include/taglib/tiostream.h \
+		../../library/include/taglib/tstringlist.h \
+		../../library/include/taglib/tlist.h \
+		../../library/include/taglib/tlist.tcc \
+		../../library/include/taglib/trefcounter.h \
+		../../library/include/taglib/tbytevectorlist.h \
+		../../library/include/taglib/audioproperties.h \
+		../../library/include/taglib/mpegfile.h \
+		../../library/include/taglib/mpegproperties.h \
+		../../library/include/taglib/mpegheader.h \
+		../../library/include/taglib/id3v2tag.h \
+		../../library/include/taglib/tmap.h \
+		../../library/include/taglib/tmap.tcc \
+		../../library/include/taglib/id3v2framefactory.h \
+		../../library/include/taglib/id3v2frame.h \
+		../../library/include/taglib/id3v2header.h \
+		../../library/include/taglib/attachedpictureframe.h \
+		../../View/InforMediaFile.h \
+		../../Model/VideoModel.h \
+		moc_predefs.h \
+		/home/an/Qt/5.15.2/gcc_64/bin/moc
+	/home/an/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/build/Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/home/an/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer -I/home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/library/include -I/home/an/Qt/5.15.2/gcc_64/include -I/home/an/Qt/5.15.2/gcc_64/include/QtQuick -I/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia -I/home/an/Qt/5.15.2/gcc_64/include/QtGui -I/home/an/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/an/Qt/5.15.2/gcc_64/include/QtQml -I/home/an/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/an/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../Controller/MediaController.h -o moc_MediaController.cpp
+
 moc_SongModel.cpp: ../../Model/SongModel.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
@@ -929,10 +1038,35 @@ moc_SongModel.cpp: ../../Model/SongModel.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfileinfo.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../library/include/taglib/taglib.h \
+		../../library/include/taglib/taglib_config.h \
+		../../library/include/taglib/fileref.h \
+		../../library/include/taglib/tfile.h \
+		../../library/include/taglib/taglib_export.h \
+		../../library/include/taglib/tag.h \
+		../../library/include/taglib/tstring.h \
+		../../library/include/taglib/tbytevector.h \
+		../../library/include/taglib/tiostream.h \
+		../../library/include/taglib/tstringlist.h \
+		../../library/include/taglib/tlist.h \
+		../../library/include/taglib/tlist.tcc \
+		../../library/include/taglib/trefcounter.h \
+		../../library/include/taglib/tbytevectorlist.h \
+		../../library/include/taglib/audioproperties.h \
+		../../library/include/taglib/mpegfile.h \
+		../../library/include/taglib/mpegproperties.h \
+		../../library/include/taglib/mpegheader.h \
+		../../library/include/taglib/id3v2tag.h \
+		../../library/include/taglib/tmap.h \
+		../../library/include/taglib/tmap.tcc \
+		../../library/include/taglib/id3v2framefactory.h \
+		../../library/include/taglib/id3v2frame.h \
+		../../library/include/taglib/id3v2header.h \
+		../../library/include/taglib/attachedpictureframe.h \
 		../../View/InforMediaFile.h \
 		moc_predefs.h \
 		/home/an/Qt/5.15.2/gcc_64/bin/moc
-	/home/an/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/build/Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/home/an/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer -I/home/an/Qt/5.15.2/gcc_64/include -I/home/an/Qt/5.15.2/gcc_64/include/QtQuick -I/home/an/Qt/5.15.2/gcc_64/include/QtGui -I/home/an/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/an/Qt/5.15.2/gcc_64/include/QtQml -I/home/an/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/an/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../Model/SongModel.h -o moc_SongModel.cpp
+	/home/an/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/build/Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/home/an/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer -I/home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/library/include -I/home/an/Qt/5.15.2/gcc_64/include -I/home/an/Qt/5.15.2/gcc_64/include/QtQuick -I/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia -I/home/an/Qt/5.15.2/gcc_64/include/QtGui -I/home/an/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/an/Qt/5.15.2/gcc_64/include/QtQml -I/home/an/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/an/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../Model/SongModel.h -o moc_SongModel.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -948,7 +1082,109 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-MediaController.o: ../../Controller/MediaController.cpp ../../Controller/MediaController.h
+MediaController.o: ../../Controller/MediaController.cpp ../../Controller/MediaController.h \
+		../../Model/SongModel.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QObject \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qnamespace.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qconfig.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qtcore-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsysinfo.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qlogging.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qflags.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmutex.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qnumeric.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qversiontagging.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstring.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qchar.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qbytearray.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qrefcount.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qarraydata.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringliteral.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringview.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qlist.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qalgorithms.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qiterator.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qhashfunctions.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qpair.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qvector.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qpoint.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringlist.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qregexp.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcoreevent.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmetatype.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QAbstractListModel \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmap.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qdebug.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qhash.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qtextstream.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qiodevice.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qlocale.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qshareddata.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qset.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QDebug \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QString \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QDir \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qdir.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfileinfo.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../library/include/taglib/taglib.h \
+		../../library/include/taglib/taglib_config.h \
+		../../library/include/taglib/fileref.h \
+		../../library/include/taglib/tfile.h \
+		../../library/include/taglib/taglib_export.h \
+		../../library/include/taglib/tag.h \
+		../../library/include/taglib/tstring.h \
+		../../library/include/taglib/tbytevector.h \
+		../../library/include/taglib/tiostream.h \
+		../../library/include/taglib/tstringlist.h \
+		../../library/include/taglib/tlist.h \
+		../../library/include/taglib/tlist.tcc \
+		../../library/include/taglib/trefcounter.h \
+		../../library/include/taglib/tbytevectorlist.h \
+		../../library/include/taglib/audioproperties.h \
+		../../library/include/taglib/mpegfile.h \
+		../../library/include/taglib/mpegproperties.h \
+		../../library/include/taglib/mpegheader.h \
+		../../library/include/taglib/id3v2tag.h \
+		../../library/include/taglib/tmap.h \
+		../../library/include/taglib/tmap.tcc \
+		../../library/include/taglib/id3v2framefactory.h \
+		../../library/include/taglib/id3v2frame.h \
+		../../library/include/taglib/id3v2header.h \
+		../../library/include/taglib/attachedpictureframe.h \
+		../../View/InforMediaFile.h \
+		../../Model/VideoModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MediaController.o ../../Controller/MediaController.cpp
 
 SongModel.o: ../../Model/SongModel.cpp ../../Model/SongModel.h \
@@ -1026,6 +1262,31 @@ SongModel.o: ../../Model/SongModel.cpp ../../Model/SongModel.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfileinfo.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../library/include/taglib/taglib.h \
+		../../library/include/taglib/taglib_config.h \
+		../../library/include/taglib/fileref.h \
+		../../library/include/taglib/tfile.h \
+		../../library/include/taglib/taglib_export.h \
+		../../library/include/taglib/tag.h \
+		../../library/include/taglib/tstring.h \
+		../../library/include/taglib/tbytevector.h \
+		../../library/include/taglib/tiostream.h \
+		../../library/include/taglib/tstringlist.h \
+		../../library/include/taglib/tlist.h \
+		../../library/include/taglib/tlist.tcc \
+		../../library/include/taglib/trefcounter.h \
+		../../library/include/taglib/tbytevectorlist.h \
+		../../library/include/taglib/audioproperties.h \
+		../../library/include/taglib/mpegfile.h \
+		../../library/include/taglib/mpegproperties.h \
+		../../library/include/taglib/mpegheader.h \
+		../../library/include/taglib/id3v2tag.h \
+		../../library/include/taglib/tmap.h \
+		../../library/include/taglib/tmap.tcc \
+		../../library/include/taglib/id3v2framefactory.h \
+		../../library/include/taglib/id3v2frame.h \
+		../../library/include/taglib/id3v2header.h \
+		../../library/include/taglib/attachedpictureframe.h \
 		../../View/InforMediaFile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SongModel.o ../../Model/SongModel.cpp
 
@@ -1173,11 +1434,41 @@ main.o: ../../main.cpp /home/an/Qt/5.15.2/gcc_64/include/QtGui/QGuiApplication \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfileinfo.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
 		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
-		../../View/InforMediaFile.h
+		../../library/include/taglib/taglib.h \
+		../../library/include/taglib/taglib_config.h \
+		../../library/include/taglib/fileref.h \
+		../../library/include/taglib/tfile.h \
+		../../library/include/taglib/taglib_export.h \
+		../../library/include/taglib/tag.h \
+		../../library/include/taglib/tstring.h \
+		../../library/include/taglib/tbytevector.h \
+		../../library/include/taglib/tiostream.h \
+		../../library/include/taglib/tstringlist.h \
+		../../library/include/taglib/tlist.h \
+		../../library/include/taglib/tlist.tcc \
+		../../library/include/taglib/trefcounter.h \
+		../../library/include/taglib/tbytevectorlist.h \
+		../../library/include/taglib/audioproperties.h \
+		../../library/include/taglib/mpegfile.h \
+		../../library/include/taglib/mpegproperties.h \
+		../../library/include/taglib/mpegheader.h \
+		../../library/include/taglib/id3v2tag.h \
+		../../library/include/taglib/tmap.h \
+		../../library/include/taglib/tmap.tcc \
+		../../library/include/taglib/id3v2framefactory.h \
+		../../library/include/taglib/id3v2frame.h \
+		../../library/include/taglib/id3v2header.h \
+		../../library/include/taglib/attachedpictureframe.h \
+		../../View/InforMediaFile.h \
+		../../Controller/MediaController.h \
+		../../Model/VideoModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
+
+moc_MediaController.o: moc_MediaController.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MediaController.o moc_MediaController.cpp
 
 moc_SongModel.o: moc_SongModel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_SongModel.o moc_SongModel.cpp

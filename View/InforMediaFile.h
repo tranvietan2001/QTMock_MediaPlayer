@@ -7,6 +7,7 @@ class InforMediaFile
 {
 public:
     InforMediaFile(QString fileName, QString titleName, QString artistName, QString albumName, unsigned int duration, QString pathCoverImage);
+    // InforMediaFile(QString &fileName, QString &titleName, QString &artistName, QString &albumName, unsigned int &duration, QString &pathCoverImage);
 
     QString getFileName() const;
     void setFileName(const QString &newFileName);

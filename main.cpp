@@ -1,6 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "Model/SongModel.h"
+// #include "Model/VideoModel.h"
+#include <Controller/MediaController.h>
+
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +19,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     qmlRegisterType<SongModel>("SongModel", 1,0,"SongModel");
+    // qmlRegisterType<VideoModel>("VideoModel", 1,0,"VideoModel");
+    qmlRegisterType<MediaController>("MediaController", 1,0,"MediaController");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(

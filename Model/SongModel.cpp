@@ -1,6 +1,15 @@
 #include "SongModel.h"
 
-SongModel::SongModel(QObject *parent): QAbstractListModel(parent){}
+
+SongModel::SongModel(QObject *parent):QAbstractListModel(parent)
+{
+    setInforData("", "sss", "sss", "", 1, "");
+    setInforData("", "gfer", "sss", "", 31, "");
+    setInforData("", "erer", "sdaf", "", 13, "");
+    setInforData("", "erg", "sdfsd", "", 14, "");
+    setInforData("", "er", "sdfsdf", "", 15, "");
+    qDebug() << __FUNCTION__ << "khỏi tạo";
+}
 
 int SongModel::rowCount(const QModelIndex &parent) const
 {
@@ -12,7 +21,7 @@ int SongModel::rowCount(const QModelIndex &parent) const
 QVariant SongModel::data(const QModelIndex &index, int role) const
 {
     // qDebug() << m_inforData.size();
-    const InforMediaFile &item = m_inforData[index.row()];
+    const InforMediaFile item = m_inforData[index.row()];
     switch(role){
     case FileNameRole:
         return item.getFileName();
@@ -52,10 +61,11 @@ QString SongModel::pathFolderSong() const
 
 void SongModel::setPathFolderSong(const QString &newPathFolderSong)
 {
+    qDebug() << __FUNCTION__ << &m_inforData;
     if (m_pathFolderSong == newPathFolderSong)
         return;
     m_pathFolderSong = newPathFolderSong;
-
+    qDebug() << __FUNCTION__ << &m_inforData;
     if(!m_inforData.empty()){
         beginResetModel();
         m_inforData.clear();
@@ -99,7 +109,6 @@ void SongModel::setPathFolderSong(const QString &newPathFolderSong)
             QString pathSaveCoverImage = "";
 
             songFiles.append(filePath);
-            // qDebug() << "i: " << i << " - " <<  filePath;
 
             TagLib::MPEG::File file(filePath.toUtf8());
             if (!file.isValid()) {
@@ -127,9 +136,13 @@ void SongModel::setPathFolderSong(const QString &newPathFolderSong)
             // qDebug() << "Duration:" << durationMedia << "seconds";
 
             beginInsertRows(QModelIndex(), rowCount(), rowCount());
-            m_inforData.append(InforMediaFile(filePath, title, artist, album, durationMedia, pathSaveCoverImage));
+            // m_inforData.append(InforMediaFile(filePath, title, artist, album, durationMedia, pathSaveCoverImage));
+
+            setInforData(filePath, title, artist, album, durationMedia, pathSaveCoverImage);
+
             endInsertRows();
 
+            qDebug() << "i: " << i << " - " <<  filePath;
             i++;
         }
     }
@@ -153,12 +166,14 @@ void SongModel::setPathFilesSong(const QString &newPathFilesSong)
         return;
     m_pathFilesSong = newPathFilesSong;
 
+    qDebug() << __FUNCTION__ << &m_inforData;
+
     if(!m_inforData.empty()){
         beginResetModel();
         m_inforData.clear();
         endResetModel();
-        qDebug() << "==========> clear infordata";
-    } else qDebug() << "===========> inforData null";
+        qDebug() << "==========> clear infordata" <<  &m_inforData;
+    } else qDebug() << "===========> inforData null" <<  &m_inforData;
 
 
     // qDebug() << "PATH FILES: " << m_pathFilesSong;
@@ -208,8 +223,21 @@ void SongModel::setPathFilesSong(const QString &newPathFilesSong)
         // qDebug() << "Duration:" << durationMedia << "seconds";
 
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
-        m_inforData.append(InforMediaFile(filePath, title, artist, album, durationMedia, pathSaveCoverImage));
+        // m_inforData.append(InforMediaFile(filePath, title, artist, album, durationMedia, pathSaveCoverImage));
+        setInforData(filePath, title, artist, album, durationMedia, pathSaveCoverImage);
         endInsertRows();
     }
     emit pathFilesSongChanged();
+
+}
+
+
+QList<InforMediaFile> SongModel::getInforData() const
+{
+    return m_inforData;
+}
+
+void SongModel::setInforData(const QString &fileName, const QString &titleName, const QString &artistName, const QString &albumName, const int &durationM, const QString &pathCoverImage)
+{
+    m_inforData.append(InforMediaFile(fileName, titleName, artistName, albumName, durationM, pathCoverImage));
 }
