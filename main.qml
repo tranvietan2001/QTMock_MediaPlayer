@@ -291,9 +291,7 @@ Window {
                                             anchors.verticalCenter:  parent.verticalCenter
 
                                             onClicked: {
-songModel.updateModel()
                                             }
-
                                         }
 
                                         NextButton{

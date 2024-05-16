@@ -3,11 +3,6 @@
 
 SongModel::SongModel(QObject *parent):QAbstractListModel(parent)
 {
-    setInforData("", "sss", "sss", "", 1, "");
-    setInforData("", "gfer", "sss", "", 31, "");
-    setInforData("", "erer", "sdaf", "", 13, "");
-    setInforData("", "erg", "sdfsd", "", 14, "");
-    setInforData("", "er", "sdfsdf", "", 15, "");
     qDebug() << __FUNCTION__ << "khỏi tạo";
 }
 
@@ -151,7 +146,7 @@ void SongModel::setPathFolderSong(const QString &newPathFolderSong)
         qDebug() << "Folder khong co file mp3";
     }
 
-    emit pathFolderSongChanged();
+    // emit pathFolderSongChanged();
 }
 
 QString SongModel::pathFilesSong() const
@@ -226,18 +221,22 @@ void SongModel::setPathFilesSong(const QString &newPathFilesSong)
         // m_inforData.append(InforMediaFile(filePath, title, artist, album, durationMedia, pathSaveCoverImage));
         setInforData(filePath, title, artist, album, durationMedia, pathSaveCoverImage);
         endInsertRows();
-    }
-    emit pathFilesSongChanged();
 
+            qDebug() << __FUNCTION__ << m_inforData.length() << "====" << &m_inforData;
+    }
+    // emit pathFilesSongChanged();
 }
 
 
 QList<InforMediaFile> SongModel::getInforData() const
 {
+    qDebug() << __FUNCTION__ << m_inforData.length() << "====" << &m_inforData;
     return m_inforData;
 }
 
 void SongModel::setInforData(const QString &fileName, const QString &titleName, const QString &artistName, const QString &albumName, const int &durationM, const QString &pathCoverImage)
 {
+
     m_inforData.append(InforMediaFile(fileName, titleName, artistName, albumName, durationM, pathCoverImage));
+    qDebug() << __FUNCTION__ << m_inforData.length() << "====" << &m_inforData;
 }

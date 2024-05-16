@@ -55,6 +55,7 @@ public slots:
 //qml call
 
 private:
+    // QList<InforMediaFile> m_inforData;
     QList<InforMediaFile> m_inforData;
     QString m_pathFolderSong;
     QString m_pathFilesSong;
