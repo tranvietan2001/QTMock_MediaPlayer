@@ -8,19 +8,27 @@ import MediaController 1.0
 Window {
     width: 1390
     height: 750
-    minimumWidth: 760
+    minimumWidth: 870
     minimumHeight: 400
     visible: true
     title: qsTr("Media Player")
+    property int isStatusBtnTab: 0
+    property int valVolumChanged: 50
 
     MediaController{
         id: songController
+        // valVolume: 50
+
+
+        onDurationChanged: {
+            console.log("Main duration")
+        }
+
     }
 
     SongModel{
         id: songModel
     }
-
 
     Row{
         id: rowViewID
@@ -47,8 +55,26 @@ Window {
                     nameBtn: "Home"
                     pathImg: "qrc:/ComponentControl/icon/home_b.png"
 
+                    Rectangle{
+                        id: sttBtnHome
+                        width: 5
+                        height: parent.height
+                        anchors.right: parent.right
+                        color: "darkorange"
+                        visible:  false
+                    }
+
                     onClicked: {
                         loaderViewAreaID.source = "qrc:/GUI/HomeView.qml"
+                        isStatusBtnTab = 1;
+                        console.log(isStatusBtnTab)
+
+                        if(isStatusBtnTab == 1){
+                            sttBtnHome.visible = true
+                            sttBtnMusic.visible = false
+                            sttBtnVideo.visible = false
+                            sttBtnHistory.visible = false
+                        }
                     }
                 }
 
@@ -59,8 +85,25 @@ Window {
                     nameBtn: "Music List"
                     pathImg: "qrc:/ComponentControl/icon/playlist_b.png"
 
+                    Rectangle{
+                        id: sttBtnMusic
+                        width: 5
+                        height: parent.height
+                        anchors.right: parent.right
+                        color: "darkorange"
+                        visible:  false
+                    }
+
                     onClicked: {
                         loaderViewAreaID.source = "qrc:/GUI/MusicList.qml"
+                        isStatusBtnTab = 2;
+                        console.log(isStatusBtnTab)
+                        if(isStatusBtnTab == 2){
+                            sttBtnHome.visible = false
+                            sttBtnMusic.visible = true
+                            sttBtnVideo.visible = false
+                            sttBtnHistory.visible = false
+                        }
                     }
                 }
 
@@ -70,8 +113,27 @@ Window {
                     heightBtn: 30
                     nameBtn: "Video List"
                     pathImg: "qrc:/ComponentControl/icon/videolist_b.png"
+
+                    Rectangle{
+                        id: sttBtnVideo
+                        width: 5
+                        height: parent.height
+                        anchors.right: parent.right
+                        color: "darkorange"
+                        visible:  false
+                    }
+
                     onClicked: {
                         loaderViewAreaID.source = "qrc:/GUI/VideoList.qml"
+
+                        isStatusBtnTab = 3;
+                        console.log(isStatusBtnTab)
+                        if(isStatusBtnTab == 3){
+                            sttBtnHome.visible = false
+                            sttBtnMusic.visible = false
+                            sttBtnVideo.visible = true
+                            sttBtnHistory.visible = false
+                        }
                     }
                 }
                 TabButton{
@@ -81,8 +143,26 @@ Window {
                     nameBtn: "History"
                     pathImg: "qrc:/ComponentControl/icon/history_b.png"
 
+                    Rectangle{
+                        id: sttBtnHistory
+                        width: 5
+                        height: parent.height
+                        anchors.right: parent.right
+                        color: "darkorange"
+                        visible:  false
+                    }
+
                     onClicked: {
                         loaderViewAreaID.source = "qrc:/GUI/HistoryView.qml"
+
+                        isStatusBtnTab = 4;
+                        console.log(isStatusBtnTab)
+                        if(isStatusBtnTab == 4){
+                            sttBtnHome.visible = false
+                            sttBtnMusic.visible = false
+                            sttBtnVideo.visible = false
+                            sttBtnHistory.visible = true
+                        }
                     }
                 }
             }
@@ -107,6 +187,18 @@ Window {
                         id: loaderViewAreaID
                         anchors.fill: viewArea
                         source: "qrc:/GUI/HomeView.qml"
+                    }
+
+                    Connections{
+                        target: loaderViewAreaID.item
+                        function onMessage(path){
+                            console.log("PATH: " + path)
+                            songController.pathFilesSongCtr = path
+                            // var index = idx
+                            // console.log("INDEX: " + index)
+                            // songController.indexPlay = 0
+                            songController.playSong()
+                        }
                     }
                 }
 
@@ -133,16 +225,23 @@ Window {
                                     width: inforMediaID.height
                                     height: width
                                     radius: width/2 - 2
-                                    color: "darkcyan"
+                                    color: "transparent"
 
-                                    Image{
-                                        id: imgInforMediaID
+                                    Rectangle{
                                         width: parent.width -20
                                         height: width
                                         anchors.centerIn: parent
-                                        source: "qrc:/ComponentControl/img/playerMusic.png"
-                                        smooth: true
+                                        radius: width/2 - 2
+                                        color: "darkcyan"
+                                        Image{
+                                            id: imgInforMediaID
+                                            anchors.fill: parent
+                                            source: "qrc:/ComponentControl/img/playerMusic.png"
+                                            smooth: true
+                                        }
                                     }
+
+
 
                                     RotationAnimation {
                                         id: rotationAnim
@@ -161,6 +260,9 @@ Window {
                                     width: inforMediaID.width - imgInforMediaID.width
                                     height: 50
                                     color: "gray"
+                                    Text {
+                                        text: songController.titleNameFile()
+                                    }
                                 }
                             }
                         }
@@ -202,10 +304,11 @@ Window {
 
                                             MediaProgressBar{
                                                 id: progressPlayerID
-                                                width: parent.width
-                                                height: 10
+                                                widthProgressBar: parent.width
+                                                heightProgressBar: 10
                                                 anchors.centerIn: parent
                                                 sizePoint: 20
+
 
                                                 // colorBackground: "black"
                                                 colorTimeLine: "darkcyan"
@@ -221,138 +324,199 @@ Window {
 
                                             Text {
                                                 id: durationPlayerID
-                                                text: "00:00"
+                                                // text: "00:00"
+                                                text: formatTime(songController.duration)
                                                 anchors.centerIn: parent
+
+                                                MouseArea{
+                                                    anchors.fill: parent
+                                                    onClicked: {
+                                                        console.log(songController.duration)
+                                                    }
+                                                }
                                             }
-
                                         }
-
                                     }
-
-
-
                                 }
                                 Rectangle{
 
                                     width: parent.width
                                     height: parent.height/3*2
-                                    // color: "gray"
+                                    color: "gray"
 
                                     Row{
-                                        height: parent.height
-                                        spacing: 5
-                                        anchors.centerIn: parent
+                                        anchors.fill: parent
 
-                                        ShuffleButton{
-                                            id: sfBtnID
-                                            widthBtn: 40
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            onClicked: {
-                                                console.log(statusShuffle)
+                                        Rectangle{
+                                            width: parent.width / 10 * 8
+                                            height: parent.height
+                                            color: "blue"
+                                            Row{
+                                                height: parent.height
+                                                spacing: 5
+                                                anchors.centerIn: parent
 
-                                                console.log(viewMediaId.width + "====" + viewMediaId.height)
-                                            }
-                                        }
+                                                ShuffleButton{
+                                                    id: sfBtnID
+                                                    widthBtn: 40
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    onClicked: {
+                                                        console.log(statusShuffle)
 
-                                        PreviousButton{
-                                            id: preBtnID
-                                            widthBtn: 40
-                                            anchors.verticalCenter:  parent.verticalCenter
-
-                                        }
-
-                                        BackwardButton{
-                                            id: bwBtnID
-                                            widthBtn: 40
-                                            anchors.verticalCenter:  parent.verticalCenter
-                                        }
-
-
-                                        PlayButton{
-                                            id: playBtnID
-                                            widthBtn: 50
-                                            anchors.verticalCenter:  parent.verticalCenter
-                                            visible: true
-
-                                            onClicked: {
-
-                                                if(sttPlayBtn){
-                                                    console.log("Play=> pause")
+                                                        console.log(viewMediaId.width + "====" + viewMediaId.height)
+                                                    }
                                                 }
-                                                else{
-                                                    console.log("Pause=> play")
+
+                                                PreviousButton{
+                                                    id: preBtnID
+                                                    widthBtn: 40
+                                                    anchors.verticalCenter:  parent.verticalCenter
+
+                                                }
+
+                                                BackwardButton{
+                                                    id: bwBtnID
+                                                    widthBtn: 40
+                                                    anchors.verticalCenter:  parent.verticalCenter
+                                                }
+
+
+                                                PlayButton{
+                                                    id: playBtnID
+                                                    widthBtn: 50
+                                                    anchors.verticalCenter:  parent.verticalCenter
+                                                    visible: true
+
+                                                    onClicked: {
+
+                                                        if(sttPlayBtn){
+                                                            console.log("Play=> pause")
+                                                        }
+                                                        else{
+                                                            console.log("Pause=> play")
+                                                        }
+                                                    }
+                                                }
+
+                                                ForwardButton{
+                                                    id: fwBtnID
+                                                    widthBtn: 40
+                                                    anchors.verticalCenter:  parent.verticalCenter
+
+                                                    onClicked: {
+                                                    }
+                                                }
+
+                                                NextButton{
+                                                    id: nextBtnID
+                                                    widthBtn: 40
+                                                    anchors.verticalCenter:  parent.verticalCenter
+                                                    onClicked: {
+                                                        // if load view nào thì điêuf khiển song hay video
+                                                        songController.processListData()
+                                                    }
+                                                }
+
+                                                LoopButton{
+                                                    id: lpBtnID
+                                                    widthBtn: 40
+                                                    anchors.verticalCenter: parent.verticalCenter
+
+                                                    onClicked: {
+
+                                                        console.log(sttLoopBtn)
+                                                    }
                                                 }
                                             }
                                         }
 
-                                        ForwardButton{
-                                            id: fwBtnID
-                                            widthBtn: 40
-                                            anchors.verticalCenter:  parent.verticalCenter
+                                        Rectangle{
+                                            width: parent.width /10 * 2 - 10
+                                            height: parent.height
+                                            color: "cyan"
 
-                                            onClicked: {
+
+                                            MediaProgressBar{
+                                                id: valVolumID
+                                                widthProgressBar: parent.width
+                                                heightProgressBar: 10
+                                                sizePoint: 20
+                                                colorTimeLine: "darkcyan"
+                                                colorPoint: "darkorange"
+                                                positionPoint: widthProgressBar/2
+                                                anchors.centerIn: parent
+
+                                                onExited: {
+                                                    resumPlay()
+                                                }
+                                                onPositionChanged: {
+                                                    resumPlay()
+                                                }
+
                                             }
-                                        }
 
-                                        NextButton{
-                                            id: nextBtnID
-                                            widthBtn: 40
-                                            anchors.verticalCenter:  parent.verticalCenter
-                                            onClicked: {
-                                                // if load view nào thì điêuf khiển song hay video
-                                                songController.processListData()
+                                            Text {
+                                                id: txtVolumID
+                                                text: valVolumChanged
+                                                anchors.centerIn: parent
+                                                font.pixelSize: 20
                                             }
+
                                         }
-
-                                        LoopButton{
-                                            id: lpBtnID
-                                            widthBtn: 40
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            onClicked: {
-
-                                                console.log(sttLoopBtn)
-                                            }
-                                        }
-
                                     }
                                 }
                             }
-
-                            // ScrollBarMedia{
-                            //     id: scb
-                            //     withScrollbar: parent.width
-                            //     heightScrollbar: 10
-                            // }
                         }
                     }
                 }
+
             }
+
+
+            //    Timer {
+            //        interval: 1000 // 1 giây
+            //        running: true
+            //        repeat: true
+
+            //        onTriggered: {
+            //            songController.processListData()
+            //            console.log("====> update <====")
+            //            // running = false; // Dừng Timer
+            //            // destroy(); // Giải phóng bộ nhớ
+            //        }
+            //    }
+
+            MouseArea{
+                //760x400
+            }
+
+            onWidthChanged: {
+                console.log("w: "+width)
+                console.log("h: "+height)
+            }
+
+
+
         }
 
     }
 
-
-    Timer {
-        interval: 1000 // 1 giây
-        running: true
-        repeat: true
-
-        onTriggered: {
-            songController.processListData()
-            console.log("====> update <====")
-            // running = false; // Dừng Timer
-            // destroy(); // Giải phóng bộ nhớ
-        }
+    function formatTime(duration) {
+        var minutes = Math.floor(duration / 60000)
+        var seconds = Math.floor((duration % 60000) / 1000)
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     }
 
 
-    MouseArea{
-        //760x400
-    }
+    function resumPlay(){
+        // valVolumChanged = valVolumID.positionPoint *100 / parent.width
+        valVolumChanged = valVolumID.positionPoint / (valVolumID.widthProgressBar / 100)
+        songController.valVolume = valVolumChanged
+        var position = progressPlayerID.positionPoint * songController.duration / progressPlayerID.widthProgressBar
+        // // playMusic.()
+        songController.playMusicAtPosition(position)
 
-    onWidthChanged: {
-        console.log("w: "+width)
-        console.log("h: "+height)
+        // console.log("C++: "+playMusic.sendDataCppToQml())
+        console.log(songController.valVolume)
     }
 }

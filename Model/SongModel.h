@@ -51,8 +51,10 @@ signals:
 
     void inforDataChanged();
 
+    void isCheckModelEmty();
+
 public slots:
-//qml call
+    //qml call
 
 private:
     // QList<InforMediaFile> m_inforData;

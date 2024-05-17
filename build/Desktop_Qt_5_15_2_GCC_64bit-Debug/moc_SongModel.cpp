@@ -23,8 +23,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_SongModel_t {
-    QByteArrayData data[9];
-    char stringdata0[132];
+    QByteArrayData data[10];
+    char stringdata0[149];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,16 +38,17 @@ QT_MOC_LITERAL(1, 10, 21), // "pathFolderSongChanged"
 QT_MOC_LITERAL(2, 32, 0), // ""
 QT_MOC_LITERAL(3, 33, 20), // "pathFilesSongChanged"
 QT_MOC_LITERAL(4, 54, 16), // "inforDataChanged"
-QT_MOC_LITERAL(5, 71, 14), // "pathFolderSong"
-QT_MOC_LITERAL(6, 86, 13), // "pathFilesSong"
-QT_MOC_LITERAL(7, 100, 9), // "inforData"
-QT_MOC_LITERAL(8, 110, 21) // "QList<InforMediaFile>"
+QT_MOC_LITERAL(5, 71, 16), // "isCheckModelEmty"
+QT_MOC_LITERAL(6, 88, 14), // "pathFolderSong"
+QT_MOC_LITERAL(7, 103, 13), // "pathFilesSong"
+QT_MOC_LITERAL(8, 117, 9), // "inforData"
+QT_MOC_LITERAL(9, 127, 21) // "QList<InforMediaFile>"
 
     },
     "SongModel\0pathFolderSongChanged\0\0"
     "pathFilesSongChanged\0inforDataChanged\0"
-    "pathFolderSong\0pathFilesSong\0inforData\0"
-    "QList<InforMediaFile>"
+    "isCheckModelEmty\0pathFolderSong\0"
+    "pathFilesSong\0inforData\0QList<InforMediaFile>"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,27 +58,29 @@ static const uint qt_meta_data_SongModel[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
-       3,   32, // properties
+       4,   14, // methods
+       3,   38, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       3,       // signalCount
+       4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x06 /* Public */,
-       3,    0,   30,    2, 0x06 /* Public */,
-       4,    0,   31,    2, 0x06 /* Public */,
+       1,    0,   34,    2, 0x06 /* Public */,
+       3,    0,   35,    2, 0x06 /* Public */,
+       4,    0,   36,    2, 0x06 /* Public */,
+       5,    0,   37,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
 
  // properties: name, type, flags
-       5, QMetaType::QString, 0x00495903,
        6, QMetaType::QString, 0x00495903,
-       7, 0x80000000 | 8, 0x00495009,
+       7, QMetaType::QString, 0x00495903,
+       8, 0x80000000 | 9, 0x00495009,
 
  // properties: notify_signal_id
        0,
@@ -96,6 +99,7 @@ void SongModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 0: _t->pathFolderSongChanged(); break;
         case 1: _t->pathFilesSongChanged(); break;
         case 2: _t->inforDataChanged(); break;
+        case 3: _t->isCheckModelEmty(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -118,6 +122,13 @@ void SongModel::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
             using _t = void (SongModel::*)();
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SongModel::inforDataChanged)) {
                 *result = 2;
+                return;
+            }
+        }
+        {
+            using _t = void (SongModel::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&SongModel::isCheckModelEmty)) {
+                *result = 3;
                 return;
             }
         }
@@ -177,13 +188,13 @@ int SongModel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 3;
+        _id -= 4;
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
@@ -221,6 +232,12 @@ void SongModel::pathFilesSongChanged()
 void SongModel::inforDataChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
+}
+
+// SIGNAL 3
+void SongModel::isCheckModelEmty()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

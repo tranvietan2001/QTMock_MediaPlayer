@@ -843,7 +843,7 @@ qrc_qml.cpp: ../../qml.qrc \
 		../../ComponentControl/icon/volume_w.png \
 		../../ComponentControl/icon/loop_b.png \
 		../../ComponentControl/icon/search_w.png \
-		../../ComponentControl/img/Record.png \
+		../../ComponentControl/icon/left-arrow.png \
 		../../ComponentControl/img/playerMusic.png
 	/home/an/Qt/5.15.2/gcc_64/bin/rcc -name qml ../../qml.qrc -o qrc_qml.cpp
 
@@ -959,6 +959,30 @@ moc_MediaController.cpp: ../../Controller/MediaController.h \
 		../../library/include/taglib/attachedpictureframe.h \
 		../../View/InforMediaFile.h \
 		../../Model/VideoModel.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtGui/qtgui-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaobject.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmultimedia.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediacontent.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaresource.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QSharedDataPointer \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QUrl \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qurl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qurlquery.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QVariant \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmetaobject.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/QMediaMetaData \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediametadata.h \
 		moc_predefs.h \
 		/home/an/Qt/5.15.2/gcc_64/bin/moc
 	/home/an/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/build/Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/home/an/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer -I/home/an/Desktop/An_wordspace/Qt/QTMock_MediaPlayer/library/include -I/home/an/Qt/5.15.2/gcc_64/include -I/home/an/Qt/5.15.2/gcc_64/include/QtQuick -I/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia -I/home/an/Qt/5.15.2/gcc_64/include/QtGui -I/home/an/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/an/Qt/5.15.2/gcc_64/include/QtQml -I/home/an/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/an/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../Controller/MediaController.h -o moc_MediaController.cpp
@@ -1184,7 +1208,31 @@ MediaController.o: ../../Controller/MediaController.cpp ../../Controller/MediaCo
 		../../library/include/taglib/id3v2header.h \
 		../../library/include/taglib/attachedpictureframe.h \
 		../../View/InforMediaFile.h \
-		../../Model/VideoModel.h
+		../../Model/VideoModel.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtGui/qtguiglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtGui/qtgui-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaobject.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmultimedia.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediacontent.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaresource.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QSharedDataPointer \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QUrl \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qurl.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qurlquery.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QVariant \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/qmetaobject.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/QMediaMetaData \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediametadata.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MediaController.o ../../Controller/MediaController.cpp
 
 SongModel.o: ../../Model/SongModel.cpp ../../Model/SongModel.h \
@@ -1461,7 +1509,24 @@ main.o: ../../main.cpp /home/an/Qt/5.15.2/gcc_64/include/QtGui/QGuiApplication \
 		../../library/include/taglib/attachedpictureframe.h \
 		../../View/InforMediaFile.h \
 		../../Controller/MediaController.h \
-		../../Model/VideoModel.h
+		../../Model/VideoModel.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/QMediaPlayer \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaplayer.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qtmultimediaglobal.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qtmultimedia-config.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaobject.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmultimedia.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediacontent.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaresource.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QSharedDataPointer \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QUrl \
+		/home/an/Qt/5.15.2/gcc_64/include/QtCore/QVariant \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediaenumdebug.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qaudio.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/QMediaMetaData \
+		/home/an/Qt/5.15.2/gcc_64/include/QtMultimedia/qmediametadata.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 qrc_qml.o: qrc_qml.cpp 

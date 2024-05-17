@@ -3,7 +3,6 @@ import QtQuick 2.15
 import QtQuick.Dialogs 1.3
 
 import SongModel 1.0
-// import MediaController 1.0
 
 Item {
     id: homeView
@@ -13,29 +12,49 @@ Item {
     property string txtColorO: "darkorange"
     property string txtColorB: "black"
     property int contentYMax: 0
+    property int idx: -1
+    property bool isClick: false
 
-    // MediaController{
-    //     id: songController
-    // }
+    signal message(string msg)
 
     SongModel{
         id: songModelCpp
         onPathFolderSongChanged:  {
             console.log("LIST FILES MP3 IN FORDER")
             isCheckLoadModel = true
+            bgViewNotLoadModel.visible = false
         }
 
         onPathFilesSongChanged: {
             console.log("LIST FILES MP3")
             isCheckLoadModel = true
+            bgViewNotLoadModel.visible = false
         }
 
+        onIsCheckModelEmty: {
+            console.log("isCheckModelEmty")
+            isCheckLoadModel = false
+            bgViewNotLoadModel.visible = true
+        }
+
+    }
+
+    Rectangle{
+        id: bgViewNotLoadModel
+        anchors.fill: parent
+        visible: false
+
+        Text {
+            anchors.centerIn: parent
+            text: qsTr("No found file mp3")
+        }
     }
 
     Rectangle{
         id: bgViewID
         anchors.fill: parent
         color: "transparent"
+
 
         Rectangle{
             id: titleList
@@ -171,12 +190,19 @@ Item {
                 width: indexTitleList.width + titleTitleList.width + artistTitleList.width + albumTitleList.width + durationTitleList.width + pathTitleList.width
                 height: 50
                 color: "transparent"
-                border.width: 1
+
                 border.color: txtColorO
 
                 Row{
                     anchors.fill: parent
                     spacing: 2
+                    Rectangle{
+                        width: 5
+                        height: parent.height
+                        color: "darkcyan"
+                        visible: index == idx? true: false
+                    }
+
                     Rectangle{
                         width: indexTitleList.width
                         height: parent.height
@@ -185,6 +211,7 @@ Item {
                             id: idxT
                             text: index+1
                             anchors.fill: parent
+                            leftPadding: 5
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
@@ -199,6 +226,7 @@ Item {
                             // text: "titleName"
                             text: title
                             anchors.fill: parent
+                            leftPadding: 5
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
@@ -213,6 +241,7 @@ Item {
                             // text: "artname"
                             text: artist
                             anchors.fill: parent
+                            leftPadding: 5
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
@@ -227,6 +256,7 @@ Item {
                             // text: "album"
                             text: album
                             anchors.fill: parent
+                            leftPadding: 5
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
@@ -239,8 +269,9 @@ Item {
                         Text {
                             id: durT
                             // text: "duration"
-                            text: duration
+                            text: formatTime(duration)
                             anchors.fill: parent
+                            leftPadding: 5
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
@@ -255,6 +286,7 @@ Item {
                             // text: "path"
                             text: file
                             anchors.fill: parent
+                            leftPadding: 5
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                         }
@@ -264,10 +296,37 @@ Item {
                 MouseArea{
                     anchors.fill: parent
                     hoverEnabled: true
-                    // propagateComposedEvents: true
-
                     onClicked: {
-                        console.log("=========================")
+                        homeView.message(pathT.text) // gửi path pathlist.text
+                        idx = index
+                        isClick = !isClick
+                        if (animation1.running) {
+                            animation1.stop();
+                        } else {
+                            if (isClick) {
+                                animation1.from = bgViewID.x
+                                animation1.to = bgViewID.width;
+                            } else {
+                                animation1.from = bgViewID.width
+                                animation1.to = bgViewID.x;
+                            }
+                            animation1.start();
+                        }
+
+                        if (animation2.running) {
+                            animation2.stop();
+                        } else {
+                            if (isClick) {
+                                animation2.from = bgViewID.x
+                                animation2.to = bgViewID.width;
+                            } else {
+                                animation2.from = bgViewID.width
+                                animation2.to = bgViewID.x;
+                            }
+                            animation2.start();
+                        }
+
+                        timer.start()
                     }
 
                     onEntered: {
@@ -299,6 +358,17 @@ Item {
                         dlgList.scale = 1
                     }
                 }
+
+                Timer {
+                    id: timer
+                    interval: 2000 // Thời gian chờ 3 giây (3000 milliseconds)
+                    running: false
+                    onTriggered: {
+                        // Khi hết thời gian chờ, hiện hình chữ nhật
+                        animationLV.visible = true;
+                    }
+                }
+
             }
             onContentYChanged: {
                 // console.log("content Y: " + listViewSong.contentY)
@@ -311,25 +381,6 @@ Item {
                 scrollPoint.y = positionPoint
 
             }
-
-            // MouseArea{
-            //     anchors.fill: parent
-            //     hoverEnabled: true
-            //     propagateComposedEvents: true
-
-            //     onEntered: {
-            //         contentYMax = listViewSong.contentHeight - listViewSong.height
-            //         if(contentYMax < listViewSong.height)
-            //             scrollArea.visible = false
-            //         else
-            //             scrollArea.visible = true
-            //     }
-
-            //     onExited: {
-            //         scrollArea.visible = false
-            //     }
-
-            // }
 
         }
 
@@ -497,6 +548,95 @@ Item {
                 console.log("Cancel")
             }
         }
+    }
 
+
+    Rectangle{
+        id: animationLV
+        width: 50
+        height: parent.height
+        radius: 10
+        color: "darkcyan"
+        visible: false
+
+        anchors{
+            right: parent.right
+            rightMargin: -10
+        }
+
+        Image {
+            source: "qrc:/ComponentControl/icon/left-arrow.png"
+            width: 30
+            height: 30
+            anchors.centerIn: parent
+        }
+
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                isClick = !isClick
+                if (animation1.running) {
+                    animation1.stop();
+                } else {
+                    if (isClick) {
+                        animation1.from = bgViewID.x
+                        animation1.to = bgViewID.width;
+                    } else {
+                        animation1.from = bgViewID.width
+                        animation1.to = bgViewID.x;
+                    }
+                    animation1.start();
+                }
+
+                if (animation2.running) {
+                    animation2.stop();
+                } else {
+                    if (isClick) {
+                        animation2.from = bgViewID.x
+                        animation2.to = bgViewID.width;
+                    } else {
+                        animation2.from = bgViewID.width
+                        animation2.to = bgViewID.x;
+                    }
+                    animation2.start();
+                }
+            }
+
+            onPressed: {
+                animationLV.color = "darkorange"
+            }
+            onExited: {
+                animationLV.color = "darkcyan"
+                animationLV.visible = false
+            }
+        }
+    }
+
+    PropertyAnimation {
+        id: animation1
+        target: titleList
+        property: "x"
+        from: titleList.width
+        to: titleList.width
+        duration: 2000
+        easing.type: Easing.InOutQuint
+        running: false
+    }
+    PropertyAnimation {
+        id: animation2
+        target: listViewSong
+        property: "x"
+        from: listViewSong.width
+        to: listViewSong.width
+        duration: 2000
+        easing.type: Easing.InOutQuint
+        running: false
+    }
+    function formatTime(duration) {
+        var minutes = Math.floor(duration / 60)
+        var seconds = Math.floor((duration % 60))
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds
     }
 }
+
+

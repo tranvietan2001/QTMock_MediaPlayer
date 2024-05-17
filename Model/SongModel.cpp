@@ -138,16 +138,18 @@ void SongModel::setPathFolderSong(const QString &newPathFolderSong)
             endInsertRows();
 
             qDebug() << "i: " << i << " - " <<  filePath;
+
             i++;
         }
     }
 
     if(songFiles.length() == 0){
         qDebug() << "Folder khong co file mp3";
-    }
-
-    // emit pathFolderSongChanged();
+        emit isCheckModelEmty();
+    }else
+        emit pathFolderSongChanged();
 }
+
 
 QString SongModel::pathFilesSong() const
 {
@@ -222,9 +224,8 @@ void SongModel::setPathFilesSong(const QString &newPathFilesSong)
         setInforData(filePath, title, artist, album, durationMedia, pathSaveCoverImage);
         endInsertRows();
 
-            qDebug() << __FUNCTION__ << m_inforData.length() << "====" << &m_inforData;
     }
-    // emit pathFilesSongChanged();
+    emit pathFilesSongChanged();
 }
 
 
@@ -238,5 +239,5 @@ void SongModel::setInforData(const QString &fileName, const QString &titleName, 
 {
 
     m_inforData.append(InforMediaFile(fileName, titleName, artistName, albumName, durationM, pathCoverImage));
-    qDebug() << __FUNCTION__ << m_inforData.length() << "====" << &m_inforData;
+    //	qDebug() << __FUNCTION__ << m_inforData.length() << "====" << &m_inforData;
 }
