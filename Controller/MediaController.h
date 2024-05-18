@@ -6,11 +6,20 @@
 
 #include <QMediaPlayer>
 #include <QMediaMetaData>
+#include <QFileInfo>
+#include <QFile>
+#include <QDir>
+// #include <QSettings>
 
 class MediaController: public QObject
 {
     Q_OBJECT
+
+    Q_PROPERTY(QString pathFileSongCtr READ pathFileSongCtr WRITE setPathFileSongCtr NOTIFY pathFileSongCtrChanged)
+
     Q_PROPERTY(QString pathFilesSongCtr READ pathFilesSongCtr WRITE setPathFilesSongCtr NOTIFY pathFilesSongCtrChanged)
+    Q_PROPERTY(QString pathFolderSongCtr READ pathFolderSongCtr WRITE setPathFolderSongCtr NOTIFY pathFolderSongCtrChanged)
+
 
     Q_PROPERTY(int indexPlay READ indexPlay WRITE setIndexPlay NOTIFY indexPlayChanged)
     Q_PROPERTY(int valVolume READ valVolume WRITE setValVolume NOTIFY valVolumeChanged)
@@ -27,11 +36,13 @@ public:
     int valVolume() const;
     Q_INVOKABLE void setValVolume(int newValVolume);
 
-
     // Nhạn path file từ qml xuống -> set để lưu vào model data
     QString pathFilesSongCtr() const;
     void setPathFilesSongCtr(const QString &newPathFilesSongCtr);
 
+    // Nhạn path folder từ qml xuống -> set để đọc file *.mp3 và lưu vào model data
+    QString pathFolderSongCtr() const;
+    void setPathFolderSongCtr(const QString &newPathFolderSongCtr);
 
     // append thong tin file đọc được từ path thông qua taglib
     void setInforDataCtr(const QString &fileName, const QString &titleName, const QString &artistName, const QString &albumName, const int &durationM, const QString &pathCoverImage);
@@ -41,78 +52,73 @@ public:
     void setIndexPlay(int newIndexPlay);
 
 
-    // Q_INVOKABLE QString titleNameFile();
-    // Q_INVOKABLE QString artistNameFile();
-    // Q_INVOKABLE QString albumNameFile();
-
     // void playSong(QString path);
-
-
-
-
-
-
     Q_INVOKABLE void playMusicAtPosition(qint64 position);
 
+    QString pathFileSongCtr() const;
+    void setPathFileSongCtr(const QString &newPathFileSongCtr);
 
 
-
+    // test gửi data từ c++ đến qml sử dụng signal slot không có connect
+    //sử dụng q-invokable để đk 1 hàm dưới cpp có thể call dùng trên qml, có thể truyền tham số vào từ qml để hàm này được xử lý dưới c++ và pát các emit signal để trả kết quả về cho qlm
+    // emit là tên signal sẽ phát ra và nhận được trên qml (có thể truyền data bằng emit signal này lên qml)
+    Q_INVOKABLE void logInforData();
 
 public slots:
 
     void processListData();
     void playSong();
-
-    // void sl_titleNameFile();
-    // void sl_artistNameFile();
-    // void sl_albumNameFile();
-    // void sl_durationFile();
-    // void sl_pathCoverImage();
+    void pauseSong();
+    void stopSong();
+    void logSongPosition();
 
 signals:
     void pathFilesSongCtrChanged();
+    void pathFileSongCtrChanged();
 
     void inforDataCtrChanged();
 
     void indexPlayChanged();
 
+    void pathFolderSongCtrChanged();
+
     void isCheckModelCtrEmty();
 
     void valVolumeChanged();
 
-    // void titleNameChanged(QString title);
-    // void artistNameChanged(QString art);
-    // void albumNameChange(QString album);
-    // void durationChange(int duration);
-    // void pathCoverImageChanged(QString path);
-
-
     void durationChanged();
-
 
     void positionChanged(qint64 position);
 
-private:
-    SongModel* m_songModel;
-    QString test = "hello";
-    QString m_pathFilesSongCtr;
+    void logTitleNameChanged(QString title);
+    void logArtistNameChanged(QString artist);
+    void logAlbumNameChanged(QString album);
 
+private:
+
+    QMediaPlayer m_mediaPlayer;
     QList<InforMediaFile> m_inforDataCtr;
+    QString m_pathFileSongCtr;
+    QString m_pathFilesSongCtr;
+    QString m_pathFolderSongCtr;
 
     int m_indexPlay;
+
 
     QString m_titleMediaPlayer = "TiTle";
     QString m_artistMediaPlayer= "Artist";
     QString m_albumMediaPlayer = "Album";
     QString m_pathMediaPlayer = "";
-    // int m_duration = 0;
     QString m_pathCoverImage = "";
+    // int m_duration = 0;
 
-    QMediaPlayer m_mediaPlayer;
-    int m_valVolume = 100;
 
-    qint64 m_duration;
-    qint64 m_position;
+
+    int m_valVolume = 50;
+    qint64 m_duration = 0;
+    qint64 m_position = 0;
+
+
 };
 
 #endif // MEDIACONTROLLER_H

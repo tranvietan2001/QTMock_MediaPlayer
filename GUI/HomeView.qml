@@ -14,6 +14,8 @@ Item {
     property int contentYMax: 0
     property int idx: -1
     property bool isClick: false
+    property string pathFilsData: ""
+    property string pathFolderData: ""
 
     signal message(string msg)
 
@@ -40,19 +42,154 @@ Item {
     }
 
     Rectangle{
+        id: areaBtn
+        width: parent.width
+        height: 40
+        color: "red"
+        // visible: listViewSong > 0 ? true: false
+        visible: true
+
+        Row{
+            spacing: 20
+            // anchors.centerIn: parent
+            Rectangle{
+                width: 100
+                height: areaBtn.height
+                Text {
+                    text: qsTr("HOME")
+                    anchors.centerIn: parent
+                    font.pixelSize: 20
+                }
+            }
+
+            Rectangle{
+                id: openFilesBtn
+                width: 120
+                height: 40
+                radius: 5
+                color: "darkcyan"
+
+                Text {
+                    id: openFilesTxt
+                    text: qsTr("Open Music")
+                    anchors.centerIn: parent
+                }
+
+                MouseArea{
+                    anchors.fill: parent
+                    hoverEnabled: true
+
+                    onClicked: {
+                        console.log("Open Mucis")
+                        fileDialog1.open()
+                    }
+
+                    onEntered: {
+                        openFilesBtn.color = "darkorange"
+                        openFilesTxt.color = "white"
+                    }
+
+                    onExited: {
+                        openFilesBtn.color = "darkcyan"
+                        openFilesTxt.color = "black"
+                    }
+                }
+
+            }
+            Rectangle{
+                id: openFolderBtn
+                width: 120
+                height: 40
+                radius: 5
+                color: "darkcyan"
+
+                Text {
+                    id: openFolderTxt
+                    text: qsTr("Open Video")
+                    anchors.centerIn: parent
+                }
+
+                MouseArea{
+                    anchors.fill: parent
+                    hoverEnabled: true
+
+                    onClicked: {
+                        console.log("Open Video")
+                        fileDialog2.open()
+                    }
+                    onEntered: {
+                        openFolderBtn.color = "darkorange"
+                        openFolderTxt.color = "white"
+                    }
+
+                    onExited: {
+                        openFolderBtn.color = "darkcyan"
+                        openFolderTxt.color = "black"
+                    }
+                }
+            }
+        }
+    }
+
+
+    FileDialog {
+        id: fileDialog1
+        title: "Select Files"
+        nameFilters: "*.mp3"
+        selectMultiple: true
+        folder: shortcuts.home
+
+        onAccepted: {
+            var path = fileUrls.toString()
+            console.log("have select path")
+            console.log("=============>" + path)
+            songModelCpp.pathFilesSong = path
+            pathFilsData = path
+            pathFolderData = ""
+        }
+        onRejected: {
+            console.log("Cancel")
+        }
+    }
+
+    FileDialog {
+        id: fileDialog2
+        title: "Select Folder"
+        selectFolder: true
+        folder: shortcuts.home
+
+        onAccepted: {
+            var path = fileUrl.toString().replace("file://", "");
+            console.log("have select path")
+            console.log("=============>" + path)
+            songModelCpp.pathFolderSong = path
+            pathFolderData = path
+            pathFilsData = ""
+        }
+        onRejected: {
+            console.log("Cancel")
+        }
+    }
+
+
+    Rectangle{
         id: bgViewNotLoadModel
-        anchors.fill: parent
-        visible: false
+        width: parent.width
+        height: parent.height - areaBtn.height
+        visible: true
+        y: parent.height - height
 
         Text {
             anchors.centerIn: parent
-            text: qsTr("No found file mp3")
+            text: qsTr("MEDIA PLAYER")
         }
     }
 
     Rectangle{
-        id: bgViewID
-        anchors.fill: parent
+        id: bgViewID       
+        width: parent.width
+        height: parent.height - areaBtn.height
+        y: parent.height - height
         color: "transparent"
 
 
@@ -298,6 +435,8 @@ Item {
                     hoverEnabled: true
                     onClicked: {
                         homeView.message(pathT.text) // gửi path pathlist.text
+                        // homeView.message(index + "$-" + pathFilsData + "$-" + pathFolderData)
+
                         idx = index
                         isClick = !isClick
                         if (animation1.running) {
@@ -427,125 +566,6 @@ Item {
                     listViewSong.contentY = scrollRatio * (listViewSong.contentHeight - listViewSong.height)
                     console.log("lvp: " + (scrollRatio * scrollArea.height))
                 }
-            }
-        }
-
-
-
-        Rectangle{
-            id: areaBtn
-            width: parent.width
-            height: 60
-            y: parent.height - height
-            color: "transparent"
-            // visible: listViewSong > 0 ? true: false
-            visible: true
-
-            Row{
-                spacing: 20
-                anchors.centerIn: parent
-                Rectangle{
-                    id: openFilesBtn
-                    width: 120
-                    height: 40
-                    radius: 5
-                    color: "darkcyan"
-
-                    Text {
-                        id: openFilesTxt
-                        text: qsTr("Open Files")
-                        anchors.centerIn: parent
-                    }
-
-                    MouseArea{
-                        anchors.fill: parent
-                        hoverEnabled: true
-
-                        onClicked: {
-                            console.log("Open File(s)")
-                            fileDialog1.open()
-                        }
-
-                        onEntered: {
-                            openFilesBtn.color = "darkorange"
-                            openFilesTxt.color = "white"
-                        }
-
-                        onExited: {
-                            openFilesBtn.color = "darkcyan"
-                            openFilesTxt.color = "black"
-                        }
-                    }
-
-                }
-                Rectangle{
-                    id: openFolderBtn
-                    width: 120
-                    height: 40
-                    radius: 5
-                    color: "darkcyan"
-
-                    Text {
-                        id: openFolderTxt
-                        text: qsTr("Open Folder")
-                        anchors.centerIn: parent
-                    }
-
-                    MouseArea{
-                        anchors.fill: parent
-                        hoverEnabled: true
-
-                        onClicked: {
-                            console.log("Open Folder")
-                            fileDialog2.open()
-                        }
-                        onEntered: {
-                            openFolderBtn.color = "darkorange"
-                            openFolderTxt.color = "white"
-                        }
-
-                        onExited: {
-                            openFolderBtn.color = "darkcyan"
-                            openFolderTxt.color = "black"
-                        }
-                    }
-                }
-            }
-        }
-
-
-        FileDialog {
-            id: fileDialog1
-            title: "Select Files"
-            nameFilters: "*.mp3"
-            selectMultiple: true
-            folder: shortcuts.home
-
-            onAccepted: {
-                var path = fileUrls.toString()
-                console.log("have select path")
-                console.log("=============>" + path)
-                songModelCpp.pathFilesSong = path
-            }
-            onRejected: {
-                console.log("Cancel")
-            }
-        }
-
-        FileDialog {
-            id: fileDialog2
-            title: "Select Folder"
-            selectFolder: true
-            folder: shortcuts.home
-
-            onAccepted: {
-                var path = fileUrl.toString().replace("file://", "");
-                console.log("have select path")
-                console.log("=============>" + path)
-                songModelCpp.pathFolderSong = path
-            }
-            onRejected: {
-                console.log("Cancel")
             }
         }
     }

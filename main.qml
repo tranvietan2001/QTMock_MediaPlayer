@@ -14,16 +14,42 @@ Window {
     title: qsTr("Media Player")
     property int isStatusBtnTab: 0
     property int valVolumChanged: 50
+    property string pathFileData: ""
+    property string pathFolderData: ""
+    property int idx: -1
+    property string splitStrings: ""
 
     MediaController{
         id: songController
         // valVolume: 50
 
-
-        onDurationChanged: {
-            console.log("Main duration")
+        // //logSongPosition() - cpp => vị trí nhạc tại thời điểm đang chạy so với duration của bài
+        onPositionChanged:  {
+            positionPlayerID.text = formatTime(position)
+            let positionP = 0
+            if(duration !== 0)
+                positionP = position*progressPlayerID.width/duration
+            progressPlayerID.positionPoint = positionP
         }
 
+        onLogTitleNameChanged: {
+            console.log("LOG TITLE: " + title)
+            titleFilePlayerID.text = title
+        }
+
+        onLogArtistNameChanged: {
+            console.log("LOG ARTIST: " + artist)
+            artistFilePlayerID.text = qsTr("Artist: ") +  artist
+        }
+
+        onLogAlbumNameChanged: {
+            console.log("LOG ALBUM: " + album)
+            albumFilePlayerID.text = qsTr("Album: ") + album
+        }
+
+        onValVolumeChanged: {
+            console.log("=========> VOLUM: " + songController.valVolume)
+        }
     }
 
     SongModel{
@@ -40,7 +66,7 @@ Window {
             // width: rowViewID.width/3
             width: 200
             height: rowViewID.height
-            color: "silver"
+            color: "#ECECEC"
             visible: true
             // opacity: 0.5
 
@@ -61,7 +87,7 @@ Window {
                         height: parent.height
                         anchors.right: parent.right
                         color: "darkorange"
-                        visible:  false
+                        visible:  true
                     }
 
                     onClicked: {
@@ -193,11 +219,9 @@ Window {
                         target: loaderViewAreaID.item
                         function onMessage(path){
                             console.log("PATH: " + path)
-                            songController.pathFilesSongCtr = path
-                            // var index = idx
-                            // console.log("INDEX: " + index)
-                            // songController.indexPlay = 0
-                            songController.playSong()
+
+                            songController.pathFileSongCtr = path
+                            songController.logInforData()
                         }
                     }
                 }
@@ -206,7 +230,7 @@ Window {
                     id:itemControlMediaID
                     width: parent.width
                     height: 100
-                    color: "springgreen"
+                    color: "transparent"
                     visible: true
 
                     Row{
@@ -214,14 +238,17 @@ Window {
                         Rectangle {
                             id: inforMediaID
                             color: "transparent";
-                            width: itemControlMediaID.width/3
+                            border{
+                                color: "#ECECEC"
+                                width: 2
+                            }
+                            radius: 8
+
+                            width: itemControlMediaID.width/4 < 270 ? 270: itemControlMediaID.width/4
                             height: itemControlMediaID.height
 
                             Row{
-                                spacing: 1
-
                                 Rectangle{
-
                                     width: inforMediaID.height
                                     height: width
                                     radius: width/2 - 2
@@ -232,7 +259,7 @@ Window {
                                         height: width
                                         anchors.centerIn: parent
                                         radius: width/2 - 2
-                                        color: "darkcyan"
+                                        color: "#ECECEC"
                                         Image{
                                             id: imgInforMediaID
                                             anchors.fill: parent
@@ -240,8 +267,6 @@ Window {
                                             smooth: true
                                         }
                                     }
-
-
 
                                     RotationAnimation {
                                         id: rotationAnim
@@ -256,13 +281,73 @@ Window {
 
                                 }
 
-                                Rectangle{
+                                Column{
                                     width: inforMediaID.width - imgInforMediaID.width
-                                    height: 50
-                                    color: "gray"
-                                    Text {
-                                        text: songController.titleNameFile()
+                                    Rectangle{
+                                        id: recTitleID
+                                        width: parent.width
+                                        height: 50
+                                        color: "transparent"
+                                        border.width: 1
+                                        border.color: "#ECECEC"
+                                        Text {
+                                            id: titleFilePlayerID
+                                            text: ""
+                                            font.pixelSize: 16
+                                            font.bold: true
+                                            anchors.verticalCenter: parent.verticalCenter
+
+
+                                            SequentialAnimation {
+                                                id: titleTextAnimation
+                                                loops: Animation.Infinite
+
+                                                PropertyAnimation {
+                                                    target: titleFilePlayerID
+                                                    property: "x"
+                                                    from: recTitleID.width
+                                                    to: -titleFilePlayerID.contentWidth
+                                                    duration: 10000
+                                                    easing.type: Easing.Linear
+                                                }
+
+                                                PropertyAnimation {
+                                                    target: titleFilePlayerID
+                                                    property: "x"
+                                                    from: -titleFilePlayerID.contentWidth
+                                                    to: recTitleID.width
+                                                    duration: 0
+                                                }
+                                            }
+
+                                            Component.onCompleted: {
+                                                if (titleFilePlayerID.contentWidth > recTitleID.width) {
+                                                    titleTextAnimation.start()
+                                                }
+                                            }
+
+
+                                        }
                                     }
+                                    Rectangle{
+                                        width: parent.width
+                                        height: 50
+                                        color: "transparent"
+                                        border.width: 1
+                                        border.color: "#ECECEC"
+                                        Column{
+                                            anchors.fill: parent
+                                            Text {
+                                                id: artistFilePlayerID
+                                                text: ""
+                                            }
+                                            Text {
+                                                id: albumFilePlayerID
+                                                text: ""
+                                            }
+                                        }
+                                    }
+
                                 }
                             }
                         }
@@ -308,11 +393,12 @@ Window {
                                                 heightProgressBar: 10
                                                 anchors.centerIn: parent
                                                 sizePoint: 20
-
-
-                                                // colorBackground: "black"
                                                 colorTimeLine: "darkcyan"
                                                 colorPoint: "darkorange"
+
+                                                onExited: {
+                                                    resumPlay()
+                                                }
 
                                             }
 
@@ -391,9 +477,12 @@ Window {
 
                                                         if(sttPlayBtn){
                                                             console.log("Play=> pause")
+                                                            songController.pauseSong()
                                                         }
                                                         else{
                                                             console.log("Pause=> play")
+                                                            songController.playSong()
+                                                            // resumPlay()
                                                         }
                                                     }
                                                 }
@@ -490,10 +579,10 @@ Window {
                 //760x400
             }
 
-            onWidthChanged: {
-                console.log("w: "+width)
-                console.log("h: "+height)
-            }
+            // onWidthChanged: {
+            //     console.log("w: "+width)
+            //     console.log("h: "+height)
+            // }
 
 
 
@@ -514,7 +603,7 @@ Window {
         songController.valVolume = valVolumChanged
         var position = progressPlayerID.positionPoint * songController.duration / progressPlayerID.widthProgressBar
         // // playMusic.()
-        songController.playMusicAtPosition(position)
+        // songController.playMusicAtPosition(position)
 
         // console.log("C++: "+playMusic.sendDataCppToQml())
         console.log(songController.valVolume)
